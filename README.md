@@ -67,12 +67,25 @@ Análisis de documentos de identidad:
 
 Detección de fraude: La IA puede examinar documentos de identidad, como pasaportes, licencias de conducir o tarjetas de identificación, para detectar posibles signos de falsificación o manipulación. Utiliza algoritmos de visión por computadora para analizar elementos de seguridad, marcas de agua, hologramas y otros detalles para determinar la autenticidad del documento.
 Extracción de datos: La IA puede extraer automáticamente información relevante, como el nombre, la fecha de nacimiento, el número de identificación, etc., de los documentos escaneados o fotografiados durante el proceso de registro. Esto agiliza el proceso de ingreso de datos y reduce la posibilidad de errores humanos.
+Luego del análisis superficial, se contrasta la información impresa y electrónica con bases de datos públicas o privadas para confirmar su veracidad.
 
 Listas AML (Anti-Money-Laundering - Anti “Lavado” de dinero):
 
 Una lista AML en inteligencia artificial (IA) es una recopilación de nombres, entidades o transacciones que están relacionadas con actividades sospechosas de lavado de dinero, financiamiento del terrorismo u otras actividades ilícitas.
 
 Estas listas suelen ser compiladas por agencias gubernamentales, organizaciones internacionales, instituciones financieras y proveedores de servicios de pago. Ejemplos de estas listas incluyen la Lista de Personas Especialmente Designadas (SDN, por sus siglas en inglés) del Departamento del Tesoro de los Estados Unidos, la lista de sanciones de la Unión Europea y la lista de la Oficina de Control de Activos Extranjeros (OFAC) de los Estados Unidos.
-
 Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para identificar patrones sospechosos en los datos financieros y transaccionales, lo que ayuda a las instituciones financieras y a las autoridades a detectar y prevenir el lavado de dinero y otras actividades financieras ilícitas.
 
+## Objetivos deseados:
+
+-Demostrar la capacidad de proporcionar acceso instantáneo a información relevante sin necesidad de que el usuario busque en diferentes lugares.
+-Brindar una experiencia de usuario fluida y eficiente, siendo el chatbot fácil de usar y comprender.
+
+## Herramientas a utilizar:
+
+Luego de la búsqueda de información realizada para llevar a cabo los primeros pasos en el desarrollo del chatbot requerido, creemos que las herramientas a utilizar serán:
+
+-Python y librerías asociadas para la implementación de IA.
+-Github
+-Google Drive
+-Uso de IAs tales como Chat GPT, Gemini, etc.
