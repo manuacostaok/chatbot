@@ -48,3 +48,31 @@ En cuanto a las normativas, el uso de la IA en el onboarding digital está sujet
 -Leyes y regulaciones sectoriales: Dependiendo de la industria en la que opera la empresa, puede haber normativas específicas relacionadas con el manejo de datos sensibles, como la Ley de Portabilidad y Responsabilidad del Seguro de Salud (HIPAA) en el sector de la salud en los Estados Unidos.
 
 -Cumplir con estas normativas es fundamental para garantizar la seguridad y privacidad de los datos de los usuarios durante el proceso de onboarding digital, y las empresas que no cumplan con estas regulaciones pueden enfrentar multas significativas y daños a su reputación. Por lo tanto, es crucial que las empresas implementen medidas adecuadas de seguridad y cumplimiento normativo al utilizar IA en el onboarding digital
+
+## Aspectos sobre la Biometría, el Análisis de Documentos de Identidad y Las Listas AML.
+
+Como hemos visto anteriormente, en el Onboarding Digital la IA juega un rol central, ya que es utilizada para convertir al proceso en uno más eficiente, personalizado y orientado a las necesidades del usuario. En dicho proceso se llevan a cabo distintas disciplinas tecnológicas, tales como la verificación de identidad a través de la biometría y el análisis de documentos de identidad, lo que mejora la experiencia del usuario y reduce los riesgos de fraude y suplantación de identidad.
+A continuación, se describe cómo interactúa la IA en cada uno de estos aspectos:
+
+Biometría:
+
+Reconocimiento facial: La IA puede analizar imágenes o videos capturados en tiempo real durante el proceso de registro para verificar la identidad del usuario mediante reconocimiento facial. Utiliza algoritmos avanzados para comparar las características faciales del usuario con los datos almacenados previamente o con una identificación emitida por el gobierno para verificar la autenticidad.
+Reconocimiento de huellas dactilares: Al igual que con el reconocimiento facial, la IA puede analizar y comparar las huellas dactilares capturadas durante el registro con las almacenadas previamente para verificar la identidad del usuario.
+
+La Biometría y las preocupaciones acerca de la privacidad y la identidad:
+
+Debido a los riesgos a la privacidad y la seguridad, se deben tomar medidas de protección adicionales en los sistemas biométricos. Para ello, la implementación de varios medios de autenticación, como la detección de gestos naturales (como el parpadeo) y la correspondencia de muestras codificadas con usuarios dentro de dominios cifrados, proporcionan un mayor nivel de seguridad y son clave al momento de frustrar ataques malintencionados.
+
+Análisis de documentos de identidad:
+
+Detección de fraude: La IA puede examinar documentos de identidad, como pasaportes, licencias de conducir o tarjetas de identificación, para detectar posibles signos de falsificación o manipulación. Utiliza algoritmos de visión por computadora para analizar elementos de seguridad, marcas de agua, hologramas y otros detalles para determinar la autenticidad del documento.
+Extracción de datos: La IA puede extraer automáticamente información relevante, como el nombre, la fecha de nacimiento, el número de identificación, etc., de los documentos escaneados o fotografiados durante el proceso de registro. Esto agiliza el proceso de ingreso de datos y reduce la posibilidad de errores humanos.
+
+Listas AML (Anti-Money-Laundering - Anti “Lavado” de dinero):
+
+Una lista AML en inteligencia artificial (IA) es una recopilación de nombres, entidades o transacciones que están relacionadas con actividades sospechosas de lavado de dinero, financiamiento del terrorismo u otras actividades ilícitas.
+
+Estas listas suelen ser compiladas por agencias gubernamentales, organizaciones internacionales, instituciones financieras y proveedores de servicios de pago. Ejemplos de estas listas incluyen la Lista de Personas Especialmente Designadas (SDN, por sus siglas en inglés) del Departamento del Tesoro de los Estados Unidos, la lista de sanciones de la Unión Europea y la lista de la Oficina de Control de Activos Extranjeros (OFAC) de los Estados Unidos.
+
+Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para identificar patrones sospechosos en los datos financieros y transaccionales, lo que ayuda a las instituciones financieras y a las autoridades a detectar y prevenir el lavado de dinero y otras actividades financieras ilícitas.
+
