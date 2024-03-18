@@ -1,5 +1,5 @@
 # Chatbot
-Repositorio dedicado al chatbot pedido para un trabajo práctico de la materia Laboratorio de construcción de Software
+Repositorio dedicado al chatbot pedido para el Trabajo Práctico Inicial de la materia Laboratorio de Construcción de Software.
 
 # Documentación
 
