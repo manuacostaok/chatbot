@@ -86,6 +86,9 @@ Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para i
 Luego de la búsqueda de información realizada para llevar a cabo los primeros pasos en el desarrollo del chatbot requerido, creemos que las herramientas a utilizar serán:
 
 -Python y librerías asociadas para la implementación de IA.
+
 -Github
+
 -Google Drive
+
 -Uso de IAs tales como Chat GPT, Gemini, etc.
