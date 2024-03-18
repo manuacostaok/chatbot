@@ -79,6 +79,7 @@ Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para i
 ## Objetivos deseados:
 
 -Demostrar la capacidad de proporcionar acceso instantáneo a información relevante sin necesidad de que el usuario busque en diferentes lugares.
+
 -Brindar una experiencia de usuario fluida y eficiente, siendo el chatbot fácil de usar y comprender.
 
 ## Herramientas a utilizar:
