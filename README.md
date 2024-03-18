@@ -51,7 +51,7 @@ En cuanto a las normativas, el uso de la IA en el onboarding digital está sujet
 
 ## Aspectos sobre la Biometría, el Análisis de Documentos de Identidad y Las Listas AML.
 
-Como hemos visto anteriormente, en el Onboarding Digital la IA juega un rol central, ya que es utilizada para convertir al proceso en uno más eficiente, personalizado y orientado a las necesidades del usuario. En dicho proceso se llevan a cabo distintas disciplinas tecnológicas, tales como la verificación de identidad a través de la biometría y el análisis de documentos de identidad, lo que mejora la experiencia del usuario y reduce los riesgos de fraude y suplantación de identidad.
+Como hemos visto anteriormente, en el Onboarding Digital la IA juega un rol central, ya que es utilizada para convertir al proceso en uno más eficiente, personalizado y orientado a las necesidades del usuario. En dicho proceso se llevan a cabo distintas disciplinas tecnológicas, tales como la verificación de identidad a través de la biometría y el análisis de documentos de identidad, lo que mejora la experiencia del usuario y reduce los riesgos de fraude y suplantación de identidad. Además, con la implementacion de las Listas AML, la IA ha demostrado ser una herramienta central en cuestiones de seguridad de alto nivel, siendo utilizada en organismos gubernamentales a gran escala.
 A continuación, se describe cómo interactúa la IA en cada uno de estos aspectos:
 
 Biometría:
