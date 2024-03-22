@@ -102,3 +102,5 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 - instalar python : https://www.python.org/downloads/
 
 - instalar NLKT : pip install nltk
+
+- ejecutar: python chatbot.py
