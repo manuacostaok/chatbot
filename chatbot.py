@@ -6,8 +6,8 @@ reflecciones = {
 
 respuestas = [
     [
-        r"se me ha caido el hosting (.*)",
-        ["Sentimos ese fallo, para reiniciarlo, entra en CPANEL y selecciona reiniciar",]
+        r"se cayó el servicio de hosting (.*)",
+        ["Sentimos ese fallo, para reiniciarlo, entra en 'Panel de control' y selecciona 'Reiniciar'",]
     ],
      [
         r"cuando hay que pagar la factura (.*)",
@@ -15,15 +15,15 @@ respuestas = [
     ],
     [
         r"(.*) ampliar el servicio",
-        ["Para ampliar el servicio, contacta con atención al cliente",]
+        ["Para ampliar el servicio contacta con atención al cliente",]
     ],
     [
         r"disculpa (.*)",
-        ["No pasa nada",]
+        ["Estoy aquí para ayudarte, no para perdonarte",]
     ],
     [
         r"hola|hey|buenas",
-        ["Hola", "Que tal",]
+        ["Hola, en que puedo ayudarte?",]
     ],
     [
         r"que (.*) quieres ?",
@@ -35,8 +35,8 @@ respuestas = [
         ["Fui creado luego del bigbang pero mi codigo fuente fue descubierto en 2024",]
     ],
     [
-        r"finalizar",
-        ["Chao","espero haberte ayudado"]
+        r"exit|salir|chau",
+        ["Chau,espero haberte ayudado"]
 ],
 ]
 def chatear():
@@ -49,8 +49,8 @@ def chatear():
             chat = Chat(respuestas, reflecciones)
             chat.converse()
         else:
-            bandera=False
             print("Hasta luego, que ande bien.") 
+            bandera=False
             exit()
 
 if __name__ == "__main__":
