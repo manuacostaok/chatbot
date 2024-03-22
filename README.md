@@ -39,7 +39,7 @@ Algunas formas en que la IA se utiliza en el onboarding digital incluyen:
 
 - Automatización de procesos: Los chatbots y sistemas de procesamiento del lenguaje natural (NLP) pueden guiar a los usuarios a través del proceso de onboarding, responder preguntas frecuentes y recopilar información de manera eficiente.
 
-* En cuanto a las normativas, el uso de la IA en el onboarding digital está sujeto a diversas regulaciones y normativas, especialmente en lo que respecta a la privacidad y la seguridad de los datos. Algunas de las normativas más relevantes incluyen:
+En cuanto a las normativas, el uso de la IA en el onboarding digital está sujeto a diversas regulaciones y normativas, especialmente en lo que respecta a la privacidad y la seguridad de los datos. Algunas de las normativas más relevantes incluyen:
 
 - Reglamento General de Protección de Datos (GDPR) en la Unión Europea: Esta regulación establece normas estrictas sobre cómo se deben recopilar, almacenar y procesar los datos personales de los individuos, incluidos aquellos recopilados durante el proceso de onboarding.
 
@@ -88,7 +88,7 @@ Luego de la búsqueda de información realizada para llevar a cabo los primeros 
 
 - Python y librerías asociadas para la implementación de IA, en este caso NLTK.
 
--- NLKT --
+- - NLKT 
 El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conjunto de bibliotecas y programas para el procesamiento del lenguaje natural (PLN) simbólico y estadísticos para el lenguaje de programación Python. NLTK incluye demostraciones gráficas y datos de muestra. Se acompaña de un libro que explica los conceptos subyacentes a las tareas de procesamiento del lenguaje compatibles el toolkit,3​además de programas de ejemplo.4​NLTK está destinado a apoyar la investigación y la enseñanza en procesamiento de lenguaje natural (PLN) o áreas muy relacionadas, que incluyen la lingüística empírica, las ciencias cognitivas, la inteligencia artificial, la recuperación de información, y el aprendizaje de la máquina.5​NLTK se ha utilizado con éxito como herramienta de enseñanza, como una herramienta de estudio individual, y como plataforma para los sistemas de investigación de prototipos y construcción.
 
 - Github
