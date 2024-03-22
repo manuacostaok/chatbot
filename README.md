@@ -31,23 +31,23 @@ El onboarding digital se refiere al proceso de incorporación de nuevos clientes
 
 Algunas formas en que la IA se utiliza en el onboarding digital incluyen:
 
--Verificación de identidad: Los sistemas de IA pueden analizar documentos de identidad escaneados, como pasaportes o licencias de conducir, para verificar la autenticidad y detectar posibles fraudes.
+- Verificación de identidad: Los sistemas de IA pueden analizar documentos de identidad escaneados, como pasaportes o licencias de conducir, para verificar la autenticidad y detectar posibles fraudes.
 
--Análisis de riesgos: Los algoritmos de IA pueden evaluar el riesgo asociado con nuevos clientes o empleados mediante el análisis de datos como historiales crediticios, antecedentes penales o comportamiento en línea.
+- Análisis de riesgos: Los algoritmos de IA pueden evaluar el riesgo asociado con nuevos clientes o empleados mediante el análisis de datos como historiales crediticios, antecedentes penales o comportamiento en línea.
 
--Personalización de la experiencia del usuario: La IA puede utilizar datos recopilados durante el proceso de onboarding para personalizar la experiencia del usuario, ofreciendo recomendaciones relevantes o adaptando la interfaz según las preferencias individuales.
+- Personalización de la experiencia del usuario: La IA puede utilizar datos recopilados durante el proceso de onboarding para personalizar la experiencia del usuario, ofreciendo recomendaciones relevantes o adaptando la interfaz según las preferencias individuales.
 
--Automatización de procesos: Los chatbots y sistemas de procesamiento del lenguaje natural (NLP) pueden guiar a los usuarios a través del proceso de onboarding, responder preguntas frecuentes y recopilar información de manera eficiente.
+- Automatización de procesos: Los chatbots y sistemas de procesamiento del lenguaje natural (NLP) pueden guiar a los usuarios a través del proceso de onboarding, responder preguntas frecuentes y recopilar información de manera eficiente.
 
-En cuanto a las normativas, el uso de la IA en el onboarding digital está sujeto a diversas regulaciones y normativas, especialmente en lo que respecta a la privacidad y la seguridad de los datos. Algunas de las normativas más relevantes incluyen:
+* En cuanto a las normativas, el uso de la IA en el onboarding digital está sujeto a diversas regulaciones y normativas, especialmente en lo que respecta a la privacidad y la seguridad de los datos. Algunas de las normativas más relevantes incluyen:
 
--Reglamento General de Protección de Datos (GDPR) en la Unión Europea: Esta regulación establece normas estrictas sobre cómo se deben recopilar, almacenar y procesar los datos personales de los individuos, incluidos aquellos recopilados durante el proceso de onboarding.
+- Reglamento General de Protección de Datos (GDPR) en la Unión Europea: Esta regulación establece normas estrictas sobre cómo se deben recopilar, almacenar y procesar los datos personales de los individuos, incluidos aquellos recopilados durante el proceso de onboarding.
 
--Ley de Protección de Datos Personales (GDPL) en América Latina: Similar al GDPR, esta ley establece reglas para el manejo de datos personales en países latinoamericanos, asegurando la protección de la privacidad de los individuos.
+- Ley de Protección de Datos Personales (GDPL) en América Latina: Similar al GDPR, esta ley establece reglas para el manejo de datos personales en países latinoamericanos, asegurando la protección de la privacidad de los individuos.
 
--Leyes y regulaciones sectoriales: Dependiendo de la industria en la que opera la empresa, puede haber normativas específicas relacionadas con el manejo de datos sensibles, como la Ley de Portabilidad y Responsabilidad del Seguro de Salud (HIPAA) en el sector de la salud en los Estados Unidos.
+- Leyes y regulaciones sectoriales: Dependiendo de la industria en la que opera la empresa, puede haber normativas específicas relacionadas con el manejo de datos sensibles, como la Ley de Portabilidad y Responsabilidad del Seguro de Salud (HIPAA) en el sector de la salud en los Estados Unidos.
 
--Cumplir con estas normativas es fundamental para garantizar la seguridad y privacidad de los datos de los usuarios durante el proceso de onboarding digital, y las empresas que no cumplan con estas regulaciones pueden enfrentar multas significativas y daños a su reputación. Por lo tanto, es crucial que las empresas implementen medidas adecuadas de seguridad y cumplimiento normativo al utilizar IA en el onboarding digital
+- Cumplir con estas normativas es fundamental para garantizar la seguridad y privacidad de los datos de los usuarios durante el proceso de onboarding digital, y las empresas que no cumplan con estas regulaciones pueden enfrentar multas significativas y daños a su reputación. Por lo tanto, es crucial que las empresas implementen medidas adecuadas de seguridad y cumplimiento normativo al utilizar IA en el onboarding digital
 
 ## Aspectos sobre la Biometría, el Análisis de Documentos de Identidad y Las Listas AML.
 
@@ -78,18 +78,27 @@ Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para i
 
 ## Objetivos deseados:
 
--Demostrar la capacidad de proporcionar acceso instantáneo a información relevante sin necesidad de que el usuario busque en diferentes lugares.
+- Demostrar la capacidad de proporcionar acceso instantáneo a información relevante sin necesidad de que el usuario busque en diferentes lugares.
 
--Brindar una experiencia de usuario fluida y eficiente, siendo el chatbot fácil de usar y comprender.
+- Brindar una experiencia de usuario fluida y eficiente, siendo el chatbot fácil de usar y comprender.
 
 ## Herramientas a utilizar:
 
 Luego de la búsqueda de información realizada para llevar a cabo los primeros pasos en el desarrollo del chatbot requerido, creemos que las herramientas a utilizar serán:
 
--Python y librerías asociadas para la implementación de IA.
+- Python y librerías asociadas para la implementación de IA, en este caso NLTK.
 
--Github
+-- NLKT --
+El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conjunto de bibliotecas y programas para el procesamiento del lenguaje natural (PLN) simbólico y estadísticos para el lenguaje de programación Python. NLTK incluye demostraciones gráficas y datos de muestra. Se acompaña de un libro que explica los conceptos subyacentes a las tareas de procesamiento del lenguaje compatibles el toolkit,3​además de programas de ejemplo.4​NLTK está destinado a apoyar la investigación y la enseñanza en procesamiento de lenguaje natural (PLN) o áreas muy relacionadas, que incluyen la lingüística empírica, las ciencias cognitivas, la inteligencia artificial, la recuperación de información, y el aprendizaje de la máquina.5​NLTK se ha utilizado con éxito como herramienta de enseñanza, como una herramienta de estudio individual, y como plataforma para los sistemas de investigación de prototipos y construcción.
 
--Google Drive
+- Github
 
--Uso de IAs tales como Chat GPT, Gemini, etc.
+- Google Drive
+
+- Uso de IAs tales como Chat GPT, Gemini, etc.
+
+## Pasos para probar el Chatbot
+
+- instalar python : https://www.python.org/downloads/
+
+- instalar NLKT : pip install nltk
