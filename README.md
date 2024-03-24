@@ -76,6 +76,9 @@ Una lista AML en inteligencia artificial (IA) es una recopilación de nombres, e
 Estas listas suelen ser compiladas por agencias gubernamentales, organizaciones internacionales, instituciones financieras y proveedores de servicios de pago. Ejemplos de estas listas incluyen la Lista de Personas Especialmente Designadas (SDN, por sus siglas en inglés) del Departamento del Tesoro de los Estados Unidos, la lista de sanciones de la Unión Europea y la lista de la Oficina de Control de Activos Extranjeros (OFAC) de los Estados Unidos.
 Los sistemas de IA utilizan estas listas AML como parte de sus algoritmos para identificar patrones sospechosos en los datos financieros y transaccionales, lo que ayuda a las instituciones financieras y a las autoridades a detectar y prevenir el lavado de dinero y otras actividades financieras ilícitas.
 
+## Nuestro Chatbot:
+- Nuestro chatbot será de soporte para compañias de servicios, en éste caso decidimos que sea una compañia de internet, el chatbot aparecerá en el portal y preguntará al usuario, sea uno ya registrado o no, y lo ayudará a resolver sus problemas tecnicos, consultar la info del servicio o a contratar el servicio en cuestión.  
+
 ## Objetivos deseados:
 
 - Demostrar la capacidad de proporcionar acceso instantáneo a información relevante sin necesidad de que el usuario busque en diferentes lugares.
@@ -90,6 +93,8 @@ Luego de la búsqueda de información realizada para llevar a cabo los primeros 
 
 - - NLKT 
 El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conjunto de bibliotecas y programas para el procesamiento del lenguaje natural (PLN) simbólico y estadísticos para el lenguaje de programación Python. NLTK incluye demostraciones gráficas y datos de muestra. Se acompaña de un libro que explica los conceptos subyacentes a las tareas de procesamiento del lenguaje compatibles el toolkit,3​además de programas de ejemplo.4​NLTK está destinado a apoyar la investigación y la enseñanza en procesamiento de lenguaje natural (PLN) o áreas muy relacionadas, que incluyen la lingüística empírica, las ciencias cognitivas, la inteligencia artificial, la recuperación de información, y el aprendizaje de la máquina.5​NLTK se ha utilizado con éxito como herramienta de enseñanza, como una herramienta de estudio individual, y como plataforma para los sistemas de investigación de prototipos y construcción.
+
+--Django como framework 
 
 - Github
 
