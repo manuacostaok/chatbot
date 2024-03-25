@@ -24,7 +24,7 @@ pares = [
     [
         r"¿Cómo puedo bloquear ciertos sitios web (.*) en mi red Wi-Fi?"    
         ["Puedes bloquear ciertos sitios web en tu red Wi-Fi utilizando la función de control parental en tu enrutador o utilizando software de filtrado de contenido. Consulta la documentación de tu enrutador para obtener instrucciones específicas."]
-    ]
+    ],
     [
         r"cuando hay que pagar la factura (.*)",
         ["Hay que pagarla el dia 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al debito automático",]
