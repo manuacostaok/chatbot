@@ -52,8 +52,12 @@ pares = [
         ["Hola, en que puedo ayudarte?",]
     ],
     [
-        r"que(.*)quieres?",
-        ["Nada, solo ayudarte, gracias",]
+        r"(.*)que quieres?|(.*)como estas?",
+        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
+    ],
+    [
+        r"nada",
+        ["No dijiste nada podrias volver a intentar",]
     ],
     [
         r"(.*)creado?",

@@ -1,9 +1,10 @@
 from nltk.chat.util import Chat, reflections
 mis_reflecciones = {
-"ir": "fui",
-"hola": "hey"
+    "ir": "fui",
+    "hola": "hey",
+    " ": "nada",
+    "": "nada"
 }
-
 pares = [
     [
         r"(.*)se cayó el servicio(.*)|(.*)mi internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)",
@@ -46,8 +47,12 @@ pares = [
         ["Hola, en que puedo ayudarte?",]
     ],
     [
-        r"que(.*)quieres?",
-        ["Nada, solo ayudarte, gracias",]
+        r"(.*)que quieres?|(.*)como estas?",
+        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
+    ],
+    [
+        r"nada",
+        ["No dijiste nada podrias volver a intentar",]
     ],
     [
         r"(.*)creado?",
