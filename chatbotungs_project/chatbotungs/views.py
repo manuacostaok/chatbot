@@ -63,6 +63,7 @@ pares = [
         r"exit|salir|chau|adios",
         ["Chau,espero haberte ayudado"]
 ],
+]
 
 # Inicializar el chat con los pares y reflecciones
 chat = Chat(pares, mis_reflecciones)
