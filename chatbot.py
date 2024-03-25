@@ -62,19 +62,19 @@ pares = [
 ],
 ]
 def chatear():
-    bandera=True
-    print("Hola, soy Cosme Fulanito, el bot de servicio de ayuda. En que puedo ayudarte? Si quieres salir escriba Exit") #mensaje por defecto
-    while(bandera==True):
-        respuesta_usuario = input()
-        respuesta_usuario=respuesta_usuario.lower()
-        if(respuesta_usuario!='exit'):        
-            chat = Chat(pares, mis_reflecciones)
-            chat.converse()
+    print("Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte? Si quieres salir escribe 'Exit'") # mensaje por defecto
+    while True:
+        respuesta_usuario = input().strip().lower()  # Eliminar espacios en blanco y convertir a minúsculas
+        if respuesta_usuario:
+            if respuesta_usuario != 'exit':
+                chat = Chat(pares, mis_reflecciones)
+                chat.converse()
+            else:
+                print("Hasta luego, espero haberte ayudado, saludos.") 
+                break
         else:
-            print("Hasta luego, espero haberte ayudado, saludos.") 
-            bandera=False
-            exit()
-
+            print("No dijiste nada, ¿podrías volver a intentarlo?")
+            
 if __name__ == "__main__":
     chatear()
 

@@ -68,7 +68,6 @@ pares = [
         ["Chau,espero haberte ayudado"]
 ],
 ]
-
 # Inicializar el chat con los pares y reflecciones
 chat = Chat(pares, mis_reflecciones)
 
@@ -79,10 +78,12 @@ def get_response(request):
     try:
         if request.method == 'POST':
             user_message = request.POST.get('message')
-            bot_response = chat.respond(user_message)
+            if not user_message.strip():
+                bot_response = "No dijiste nada. ¿Podrías volver a intentarlo?"
+            else:
+                bot_response = chat.respond(user_message)
             return JsonResponse({'response': bot_response})
         else:
             return JsonResponse({'error': 'No se recibió una solicitud POST'})
     except Exception as e:
         return JsonResponse({'error': str(e)})
-
