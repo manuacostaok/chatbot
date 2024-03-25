@@ -65,18 +65,18 @@ def chatear():
     print("Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte? Si quieres salir escribe 'Exit'") # mensaje por defecto
     while True:
         respuesta_usuario = input().strip().lower()  # Eliminar espacios en blanco y convertir a minúsculas
-        if respuesta_usuario:
-            if respuesta_usuario != 'exit':
-                chat = Chat(pares, mis_reflecciones)
-                chat.converse()
-            else:
-                print("Hasta luego, espero haberte ayudado, saludos.") 
-                break
+        if respuesta_usuario == 'exit':
+            print("Hasta luego, espero haberte ayudado, saludos.") 
+            break
+        elif respuesta_usuario:
+            chat = Chat(pares, mis_reflecciones)
+            chat.converse()
         else:
             print("No dijiste nada, ¿podrías volver a intentarlo?")
-            
+
+
 if __name__ == "__main__":
     chatear()
 
-chatear()
+
 
