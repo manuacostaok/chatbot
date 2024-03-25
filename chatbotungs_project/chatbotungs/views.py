@@ -1,19 +1,20 @@
 from django.shortcuts import render
-from django.http import JsonResponse
 from nltk.chat.util import Chat, reflections
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
+from chatbot import chatear  # Importa la función chatear desde script chatbot.py
 
 # Definir los pares de conversación y reflecciones
 mis_reflecciones = {
     "ir": "fui",
-    "hola": "hey",
-    " ": "nada",
-    "": "nada"
+    "hola": "hey"
 }
 
 pares = [
     [
         r"(.*)se cayó el servicio(.*)|(.*)mi internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)",
-        ["Sentimos ese fallo, puede reiniciar su modem desenchufandolo por unos segundos y dejando que las luces enciendan, estaremos checkeando que nuestro sistema no tenga problemas, si ya reinicio el modem aguarde"]
+        ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas. Si ya reinició el modem, espere por favor."]
     ],
     [
        r"(.*)Como puedo proteger mi red Wi-Fi(.*)|(.*)conectarse sin autorización?" ,
@@ -33,57 +34,61 @@ pares = [
     ],
     [
         r"(.*)cuando hay que pagar la factura(.*)",
-        ["Hay que pagarla el dia 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al debito automático",]
+        ["Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual. También puedes adherirla al débito automático."]
     ],
     [
         r"(.*)ya reinicie mi modem y sigo sin internet(.*)",
-        ["A continuacion, digite su numero de dni para poder chequear que todo esté en orden, de no ser así nos estaremos contactado por su telefono celular para brindarle mejor atención ",]
+        ["A continuación, ingrese su número de DNI para poder chequear que todo esté en orden. De no ser así, nos pondremos en contacto por su teléfono celular para brindarle una mejor atención."]
     ],
     [
         r"(.*)ampliar el servicio",
-        ["Para ampliar el servicio contacta con atención al cliente",]
+        ["Para ampliar el servicio, contacta con atención al cliente."]
     ],
     [
         r"disculpa(.*)",
-        ["Estoy aquí para ayudarte, no para perdonarte",]
+        ["Estoy aquí para ayudarte, no para perdonarte."]
     ],
     [
         r"hola|hey|buenas",
-        ["Hola, en que puedo ayudarte?",]
+        ["Hola, ¿en qué puedo ayudarte?"]
     ],
     [
         r"(.*)que quieres?|(.*)como estas?",
-        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
+        ["Nada, estoy bien, solo quiero ayudarte. Gracias."]
     ],
     [
         r"nada",
-        ["No dijiste nada podrias volver a intentar",]
+        ["No dijiste nada. ¿Podrías volver a intentarlo?"]
     ],
     [
         r"(.*)creado?",
-        ["Fui creado luego del bigbang pero mi codigo fuente fue descubierto en 2024",]
+        ["Fui creado luego del Big Bang, pero mi código fuente fue descubierto en 2024."]
     ],
     [
-        r"exit|salir|chau|adios",
-        ["Chau,espero haberte ayudado"]
-],
+        r"salir|chau|adios",
+        ["Chau, espero haberte ayudado. Recuerda que para salir del chat debes escribir 'EXIT'."]
+    ],
 ]
+
 # Inicializar el chat con los pares y reflecciones
 chat = Chat(pares, mis_reflecciones)
 
+@ensure_csrf_cookie
 def index(request):
     return render(request, 'chatbotungs/index.html')
 
+
+@csrf_exempt  # Permite las solicitudes POST sin CSRF token (solo para fines de demostración)
 def get_response(request):
-    try:
-        if request.method == 'POST':
+    if request.method == 'POST':
+        try:
             user_message = request.POST.get('message')
-            if not user_message.strip():
-                bot_response = "No dijiste nada. ¿Podrías volver a intentarlo?"
+            if user_message:
+                bot_response = chatear(user_message)  # Obtiene la respuesta del bot
+                return JsonResponse({'response': bot_response})  # Devuelve la respuesta como JSON
             else:
-                bot_response = chat.respond(user_message)
-            return JsonResponse({'response': bot_response})
-        else:
-            return JsonResponse({'error': 'No se recibió una solicitud POST'})
-    except Exception as e:
-        return JsonResponse({'error': str(e)})
+                return JsonResponse({'error': 'El mensaje del usuario está vacío'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    else:
+        return JsonResponse({'error': 'Método no permitido'})
