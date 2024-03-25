@@ -1,7 +1,13 @@
+from django.shortcuts import render
+from django.http import JsonResponse
 from nltk.chat.util import Chat, reflections
+
+# Definir los pares de conversación y reflecciones
 mis_reflecciones = {
-"ir": "fui",
-"hola": "hey"
+    "ir": "fui",
+    "hola": "hey",
+    " ": "nada",
+    "": "nada"
 }
 
 pares = [
@@ -46,8 +52,13 @@ pares = [
         ["Hola, en que puedo ayudarte?",]
     ],
     [
-        r"que (.*) quieres ?",
-        ["Nada, solo ayudarte, gracias",]
+        r"que (.*) quieres ?|como estas",
+        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
+        
+    ],
+    [
+        r" |nada", #no anda esto parece
+        ["No dijiste nada, puedes volver a intentar?",]
         
     ],
     [
@@ -59,22 +70,21 @@ pares = [
         ["Chau,espero haberte ayudado"]
 ],
 ]
-def chatear():
-    bandera=True
-    print("Hola, soy Cosme Fulanito, el bot de servicio de ayuda. En que puedo ayudarte? Si quieres salir escriba Exit") #mensaje por defecto
-    while(bandera==True):
-        respuesta_usuario = input()
-        respuesta_usuario=respuesta_usuario.lower()
-        if(respuesta_usuario!='exit'):        
-            chat = Chat(pares, mis_reflecciones)
-            chat.converse()
+
+# Inicializar el chat con los pares y reflecciones
+chat = Chat(pares, mis_reflecciones)
+
+def index(request):
+    return render(request, 'chatbotungs/index.html')
+
+def get_response(request):
+    try:
+        if request.method == 'POST':
+            user_message = request.POST.get('message')
+            bot_response = chat.respond(user_message)
+            return JsonResponse({'response': bot_response})
         else:
-            print("Hasta luego, espero haberte ayudado, saludos.") 
-            bandera=False
-            exit()
-
-if __name__ == "__main__":
-    chatear()
-
-chatear()
+            return JsonResponse({'error': 'No se recibió una solicitud POST'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)})
 

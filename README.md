@@ -91,14 +91,12 @@ Luego de la búsqueda de información realizada para llevar a cabo los primeros 
 
 - Python y librerías asociadas para la implementación de IA, en este caso NLTK.
 
-- - NLKT 
+- - NLKT  (Natural Language Toolkit)
 El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conjunto de bibliotecas y programas para el procesamiento del lenguaje natural (PLN) simbólico y estadísticos para el lenguaje de programación Python. NLTK incluye demostraciones gráficas y datos de muestra. Se acompaña de un libro que explica los conceptos subyacentes a las tareas de procesamiento del lenguaje compatibles el toolkit,3​además de programas de ejemplo.4​NLTK está destinado a apoyar la investigación y la enseñanza en procesamiento de lenguaje natural (PLN) o áreas muy relacionadas, que incluyen la lingüística empírica, las ciencias cognitivas, la inteligencia artificial, la recuperación de información, y el aprendizaje de la máquina.5​NLTK se ha utilizado con éxito como herramienta de enseñanza, como una herramienta de estudio individual, y como plataforma para los sistemas de investigación de prototipos y construcción.
 
---Django como framework 
+- Django como framework 
 
 - Github
-
-- Google Drive
 
 - Uso de IAs tales como Chat GPT, Gemini, etc.
 
@@ -108,4 +106,4 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 
 - instalar NLKT : pip install nltk
 
-- ejecutar: python chatbot.py
+- ejecutar desde consola: python chatbot.py
