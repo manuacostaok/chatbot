@@ -76,26 +76,32 @@
 
         // Función para enviar un mensaje y recibir una respuesta del servidor
         function sendMessage() {
-    var userInput = document.getElementById("user-input").value;
-    chatBox.innerHTML += "<p><strong>Tú:</strong> " + userInput + "</p>";
+            var userInput = document.getElementById("user-input").value;
+            chatBox.innerHTML += "<p><strong>Tú:</strong> " + userInput + "</p>";
 
-    fetch('/get_response/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '{{ csrf_token }}'
-        },
-        body: JSON.stringify({ message: userInput })
-    })
-    .then(response => response.json())  // Convertir la respuesta a JSON
-    .then(data => {
-        console.log(data.response);  // Imprime la respuesta del servidor en la consola
-        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";  // Agrega la respuesta al chat
-    });
+            fetch('/get_response/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.log(data.error);  // Imprime el error en la consola
+                        // Maneja el error aquí, por ejemplo, mostrando un mensaje de advertencia
+                        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
+                    } else {
+                        console.log(data.response);  // Imprime la respuesta del servidor en la consola
+                        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
+                    }
+                });
 
-    // Limpiar campo de entrada después de enviar el mensaje
-    document.getElementById("user-input").value = "";
-}
+            // Limpiar campo de entrada después de enviar el mensaje
+            document.getElementById("user-input").value = "";
+        }
         // Función para obtener la respuesta inicial del bot al cargar la página
         document.addEventListener("DOMContentLoaded", function () {
             fetch('/get_response/', {
