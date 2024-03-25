@@ -67,7 +67,7 @@
             <!-- Mensaje de bienvenida del bot -->
             <p><strong>Bot:</strong> Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte?</p>
         </div>
-        <input type="text" id="user-input" placeholder="Escribe aquí...">
+        <input type="text" id="user-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
         <button onclick="sendMessage()">Enviar</button>
     </div>
     <script>
@@ -102,6 +102,18 @@
             // Limpiar campo de entrada después de enviar el mensaje
             document.getElementById("user-input").value = "";
         }
+
+        // Función para manejar la pulsación de tecla en el campo de entrada de texto
+        function handleKeyPress(event) {
+            // Verificar si la tecla presionada es "Enter" (código 13)
+            if (event.keyCode === 13) {
+                // Evitar el comportamiento predeterminado del evento (evitar enviar el formulario)
+                event.preventDefault();
+                // Llamar a la función sendMessage cuando se presione "Enter"
+                sendMessage();
+            }
+        }
+
         // Función para obtener la respuesta inicial del bot al cargar la página
         document.addEventListener("DOMContentLoaded", function () {
             fetch('/get_response/', {
