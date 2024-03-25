@@ -34,10 +34,6 @@ pares = [
         ["A continuacion, digite su numero de dni para poder chequear que todo esté en orden, de no ser así nos estaremos contactado por su telefono celular para brindarle mejor atención ",]
     ],
     [
-        r"¿Cómo puedo mejorar la señal Wi-Fi en mi casa?",
-        ["Para mejorar la señal Wi-Fi, podrías considerar colocar tu enrutador en un lugar más central en tu casa y alejarlo de posibles fuentes de interferencia, como electrodomésticos grandes o paredes gruesas. También podrías invertir en un extensor de alcance Wi-Fi o enrutadores de malla para ampliar la cobertura de tu red."]
-    ],
-    [
         r"(.*) ampliar el servicio",
         ["Para ampliar el servicio contacta con atención al cliente",]
     ],
