@@ -107,3 +107,9 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 - instalar NLKT : pip install nltk
 
 - ejecutar desde consola: python chatbot.py
+
+- Para ejecutar la prueba del chat en el servidor ejecutar dentro de la carpeta del proyecto: python manage.py runserver
+
+## Avances
+
+- Como avances en el chatbot tenemos la implementacion de Django como framework para poder hostear la app y probarla como servicio
