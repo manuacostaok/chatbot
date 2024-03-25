@@ -10,19 +10,19 @@ pares = [
         ["Sentimos ese fallo, puede reiniciar su modem desenchufandolo por unos segundos y dejando que las luces enciendan, estaremos checkeando que nuestro sistema no tenga problemas, si ya reinicio el modem aguarde"]
     ],
     [
-       r"¿Cómo puedo proteger mi red Wi-Fi de (.*) | (.*) conectarse sin autorización?" 
+       r"¿Cómo puedo proteger mi red Wi-Fi de (.*) | (.*) conectarse sin autorización?" ,
        ["Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos."]
     ],
     [
-        r"Mi conexión a internet es más lenta en ciertas habitaciones de mi casa, ¿qué puedo hacer al respecto?"
+        r"Mi conexión a internet es más lenta en ciertas habitaciones de mi casa, ¿qué puedo hacer al respecto?",
         ["Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas."]
     ],
     [
-        r"¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?"
+        r"¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?",
         ["La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo."]
     ],
     [
-        r"¿Cómo puedo bloquear ciertos sitios web (.*) en mi red Wi-Fi?"    
+        r"¿Cómo puedo bloquear ciertos sitios web (.*) en mi red Wi-Fi?",
         ["Puedes bloquear ciertos sitios web en tu red Wi-Fi utilizando la función de control parental en tu enrutador o utilizando software de filtrado de contenido. Consulta la documentación de tu enrutador para obtener instrucciones específicas."]
     ],
     [
@@ -34,7 +34,7 @@ pares = [
         ["A continuacion, digite su numero de dni para poder chequear que todo esté en orden, de no ser así nos estaremos contactado por su telefono celular para brindarle mejor atención ",]
     ],
     [
-        r"¿Cómo puedo mejorar la señal Wi-Fi en mi casa?"
+        r"¿Cómo puedo mejorar la señal Wi-Fi en mi casa?",
         ["Para mejorar la señal Wi-Fi, podrías considerar colocar tu enrutador en un lugar más central en tu casa y alejarlo de posibles fuentes de interferencia, como electrodomésticos grandes o paredes gruesas. También podrías invertir en un extensor de alcance Wi-Fi o enrutadores de malla para ampliar la cobertura de tu red."]
     ],
     [
