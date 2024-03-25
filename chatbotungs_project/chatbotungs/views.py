@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from nltk.chat.util import Chat, reflections
 from django.http import JsonResponse
+import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
@@ -78,11 +79,12 @@ def index(request):
     return render(request, 'chatbotungs/index.html')
 
 
-@csrf_exempt  # Permite las solicitudes POST sin CSRF token (solo para fines de demostración)
+@csrf_exempt
 def get_response(request):
     if request.method == 'POST':
         try:
-            user_message = request.POST.get('message')
+            data = json.loads(request.body)
+            user_message = data.get('message')
             if user_message:
                 bot_response = chatear(user_message)  # Obtiene la respuesta del bot
                 return JsonResponse({'response': bot_response})  # Devuelve la respuesta como JSON
