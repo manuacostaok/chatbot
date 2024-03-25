@@ -2,8 +2,6 @@ from nltk.chat.util import Chat, reflections
 mis_reflecciones = {
     "ir": "fui",
     "hola": "hey",
-    " ": "nada",
-    "": "nada"
 }
 pares = [
     [
@@ -59,8 +57,8 @@ pares = [
         ["Fui creado luego del bigbang pero mi codigo fuente fue descubierto en 2024",]
     ],
     [
-        r"exit|salir|chau|adios",
-        ["Chau,espero haberte ayudado"]
+        r"salir|chau|adios",
+        ["Chau,espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'"]
 ],
 ]
 def chatear():
