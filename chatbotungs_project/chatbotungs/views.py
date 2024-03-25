@@ -14,7 +14,7 @@ mis_reflecciones = {
 
 pares = [
     [
-        r"(.*)se cayó el servicio(.*)|(.*)mi internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)",
+        r"(.*)se cayó el servicio(.*)|(.*)internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)|(.*)internet anda mal(.*)|(.*)me anda mal internet(.*)",
         ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas. Si ya reinició el modem, espere por favor."]
     ],
     [
