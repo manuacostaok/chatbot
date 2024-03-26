@@ -5,60 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        #chat-container {
-            max-width: 400px;
-            margin: 50px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        #chat-box {
-            height: 300px;
-            overflow-y: scroll;
-            padding: 10px;
-            background-color: #f2f2f2;
-        }
-
-        #user-input {
-            width: calc(100% - 70px);
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #ccc;
-            border-radius: 0;
-            float: left;
-        }
-
-        button {
-            width: 70px;
-            height: 100%;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 0;
-            float: right;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        p {
-            margin: 5px 0;
-        }
-
-        p strong {
-            color: #4CAF50;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
@@ -67,69 +15,12 @@
             <!-- Mensaje de bienvenida del bot -->
             <p><strong>Bot:</strong> Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte?</p>
         </div>
-        <input type="text" id="user-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
-        <button onclick="sendMessage()">Enviar</button>
+        <div id="user-input-container"> <!-- Contenedor para el campo de entrada y el botón -->
+            <input type="text" id="user-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
     </div>
-    <script>
-        // Obtener referencia al contenedor del chat y al cuadro de mensajes
-        var chatBox = document.getElementById("chat-box");
-
-        // Función para enviar un mensaje y recibir una respuesta del servidor
-        function sendMessage() {
-            var userInput = document.getElementById("user-input").value;
-            chatBox.innerHTML += "<p><strong>Tú:</strong> " + userInput + "</p>";
-
-            fetch('/get_response/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                body: JSON.stringify({ message: userInput })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.log(data.error);  // Imprime el error en la consola
-                        // Maneja el error aquí, por ejemplo, mostrando un mensaje de advertencia
-                        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
-                    } else {
-                        console.log(data.response);  // Imprime la respuesta del servidor en la consola
-                        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
-                    }
-                });
-
-            // Limpiar campo de entrada después de enviar el mensaje
-            document.getElementById("user-input").value = "";
-        }
-
-        // Función para manejar la pulsación de tecla en el campo de entrada de texto
-        function handleKeyPress(event) {
-            // Verificar si la tecla presionada es "Enter" (código 13)
-            if (event.keyCode === 13) {
-                // Evitar el comportamiento predeterminado del evento (evitar enviar el formulario)
-                event.preventDefault();
-                // Llamar a la función sendMessage cuando se presione "Enter"
-                sendMessage();
-            }
-        }
-
-        // Función para obtener la respuesta inicial del bot al cargar la página
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('/get_response/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                body: JSON.stringify({ message: "" })  // Envía un mensaje vacío para obtener la respuesta inicial del bot
-            })
-                .then(response => response.text())  // Cambia de response.json() a response.text()
-                .then(data => {
-                    chatBox.innerHTML += "<p><strong>Bot:</strong> " + data + "</p>";  // Muestra la respuesta como texto
-                });
-        });
-    </script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>

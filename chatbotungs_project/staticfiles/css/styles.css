@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#chat-container {
+    max-width: 400px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#chat-box {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+#input-container {
+    display: flex; /* Convertimos el contenedor en un contenedor flex */
+    justify-content: center;
+    align-items: center;
+}
+
+#user-input {
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-radius: 5px; /* Agregamos bordes redondeados */
+}
+
+button {
+    width: 70px;
+    height: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Agregamos bordes redondeados */
+    margin-left: 5px; /* Agregamos un margen a la izquierda para separar el botón del campo de entrada */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin: 5px 0;
+}
+
+p strong {
+    color: #4CAF50;
+}
