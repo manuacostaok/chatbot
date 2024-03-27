@@ -7,25 +7,27 @@ function sendMessage() {
     chatBox.innerHTML += "<p><strong>Tú:</strong> " + userInput + "</p>";
 
     fetch('/get_response/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '{{ csrf_token }}'
-        },
-        body: JSON.stringify({ message: userInput })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.log(data.error);  // Imprime el error en la consola
-                // Maneja el error aquí, por ejemplo, mostrando un mensaje de advertencia
-                chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
-            } else {
-                console.log(data.response);  // Imprime la respuesta del servidor en la consola
-                chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
-            }
-        });
-
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify({ message: userInput })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        console.log(data.error);  // Imprime el error en la consola
+        // Maneja el error aquí, por ejemplo, mostrando un mensaje de advertencia
+        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
+    } else if (data.response === 'exit') { //cierra la ventana
+        chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>"
+        window.close(); // ¿Quizás quiso decir 'window.location.href = "/exit/"'?
+    } else {
+        console.log(data.response);  // Imprime la respuesta del servidor en la consola
+        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
+    }
+});
     // Limpiar campo de entrada después de enviar el mensaje
     document.getElementById("user-input").value = "";
 }

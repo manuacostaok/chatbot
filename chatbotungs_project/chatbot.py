@@ -20,7 +20,7 @@ mis_reflecciones = {
 lemmatizer = WordNetLemmatizer()
 
 #setup array con palabras clave
-arrayOneWolrd = ['hola','hey','buenas','nada','salir','chau','adios','exit']
+arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit']
 # Pares de patrones y respuestas
 
 pares = [
@@ -106,13 +106,13 @@ def clasificar_intencion(respuesta_usuario):
 # Función para chatear con el usuario
 def chatear(respuesta_usuario):
     if respuesta_usuario.lower() == 'exit':
-        respuesta_bot = "Hasta luego, espero haberte ayudado, saludos."
-    elif respuesta_usuario.strip():  # Verificar si la entrada no está vacía
-        if len(respuesta_usuario.split()) == 1 and respuesta_usuario not in arrayOneWolrd :  # Verificar si la entrada tiene solo una palabra
+        respuesta_bot = "exit"
+    elif respuesta_usuario.strip():  # Verificar si la entrada tiene sentido
+        if len(respuesta_usuario.split()) == 1 and respuesta_usuario not in arrayOneWord :  # Verificar si la entrada tiene solo una palabra
             respuesta_bot = "Lo siento, no logro comprender la pregunta. Por favor, intenta proporcionar más detalles."
         else:
             respuesta_bot = clasificar_intencion(respuesta_usuario)
-    else:
+    else: # Verificar si la entrada no está vacía
         respuesta_bot = "No dijiste nada, ¿podrías volver a intentarlo?"
     return respuesta_bot
 
