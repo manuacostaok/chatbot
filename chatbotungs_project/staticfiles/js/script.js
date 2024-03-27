@@ -41,18 +41,3 @@ function handleKeyPress(event) {
     }
 }
 
-// Función para obtener la respuesta inicial del bot al cargar la página
-document.addEventListener("DOMContentLoaded", function () {
-    fetch('/get_response/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '{{ csrf_token }}'
-        },
-        body: JSON.stringify({ message: "" })  // Envía un mensaje vacío para obtener la respuesta inicial del bot
-    })
-        .then(response => response.text())  // Cambia de response.json() a response.text()
-        .then(data => {
-            chatBox.innerHTML += "<p><strong>Bot:</strong> " + data + "</p>";  // Muestra la respuesta como texto
-        });
-});
