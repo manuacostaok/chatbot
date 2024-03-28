@@ -7,28 +7,27 @@ function sendMessage() {
     chatBox.innerHTML += "<p><strong>Tú:</strong> " + userInput + "</p>";
 
     fetch('/get_response/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': '{{ csrf_token }}'
-    },
-    body: JSON.stringify({ message: userInput })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.error) {
-        console.log(data.error);  // Imprime el error en la consola
-        // Maneja el error aquí, por ejemplo, mostrando un mensaje de advertencia
-        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
-    } else if (data.response === 'exit') { //cierra la ventana
-        chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>"
-        window.close(); // ¿Quizás quiso decir 'window.location.href = "/exit/"'?
-    } else {
-        console.log(data.response);  // Imprime la respuesta del servidor en la consola
-        chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + "</p>";
-    }
-});
-    // Limpiar campo de entrada después de enviar el mensaje
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({ message: userInput })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.log(data.error);
+                chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
+            } else if (data.response === 'exit') {
+                chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>"
+                window.close();
+            } else {
+                console.log(data.response);
+                chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + " <button class='like-button' onclick='likeResponse(this)'>Me gusta</button></p>";
+            }
+        });
+
     document.getElementById("user-input").value = "";
 }
 
@@ -43,3 +42,52 @@ function handleKeyPress(event) {
     }
 }
 
+
+function likeResponse(button) {
+    // Obtener la respuesta del bot
+    var botResponse = button.parentNode.innerText.replace('Me gusta', '').trim();
+    
+    // Realizar una solicitud AJAX para enviar la retroalimentación al servidor
+    fetch('/feedback/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')  // Obtener el token CSRF de las cookies
+        },
+        body: JSON.stringify({ 
+            response: botResponse,
+            liked: true  // Indicar que se dio like a la respuesta
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // La retroalimentación se envió correctamente
+            alert('¡Gracias por tu retroalimentación!');
+        } else {
+            // Hubo un error al enviar la retroalimentación
+            alert('Error al enviar la retroalimentación');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al enviar la retroalimentación');
+    });
+}
+
+
+// Función para obtener el valor de una cookie por su nombre
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Buscar la cookie por su nombre
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

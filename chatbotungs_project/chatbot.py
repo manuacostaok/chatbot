@@ -9,7 +9,7 @@ from nltk.chat.util import Chat, reflections
 
 import nltk
 nltk.download('wordnet')
-
+nltk.download('punkt')
 # Reflecciones para NLTK
 mis_reflecciones = {
     "ir": "fui",

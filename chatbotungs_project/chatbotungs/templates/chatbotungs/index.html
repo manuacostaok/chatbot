@@ -10,14 +10,26 @@
 </head>
 
 <body>
+    <h1>Respuestas del Bot con Likes</h1>
+    <ul>
+        {% for response in bot_responses %}
+            <li>{{ response.bot_response }} - Likes: {{ response.likes }}</li>
+        {% endfor %}
+    </ul>
     <div id="chat-container">
         <div id="chat-box">
-            <!-- Mensaje de bienvenida del bot -->
+            <!-- Mensaje de bienvenida del bot con token CSRF -->
+            {% csrf_token %}
             <p><strong>Bot:</strong> Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte?</p>
+            {% for bot_response in bot_responses %}
+                <p><strong>Respuesta del bot:</strong> {{ bot_response.bot_response }}</p>
+                <p><strong>Likes:</strong> {{ bot_response.likes }}</p>
+                <button class="like-button" onclick="likeResponse('{{ bot_response.id }}')">Me gusta</button>
+            {% endfor %}
         </div>
         <div id="user-input-container"> <!-- Contenedor para el campo de entrada y el botón -->
             <input type="text" id="user-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()">Enviar</button>
+            <button id="send-button" onclick="sendMessage()">Enviar</button>
         </div>
     </div>
     <script src="{% static 'js/script.js' %}"></script>

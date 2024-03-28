@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from nltk.chat.util import Chat, reflections
 from django.http import JsonResponse
-import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
+from .models import BotResponseFeedback
+import json
 
 # Definir los pares de conversación y reflecciones
 mis_reflecciones = {
@@ -94,3 +95,49 @@ def get_response(request):
             return JsonResponse({'error': str(e)})
     else:
         return JsonResponse({'error': 'Método no permitido'})
+    
+def view_likes(request):
+    responses_with_likes = BotResponseFeedback.objects.all()
+    return render(request, 'view_likes.html', {'responses_with_likes': responses_with_likes})
+
+
+def feedback(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_question = data.get('user_question')
+        bot_response = data.get('bot_response')
+        liked = data.get('liked', False)  # Obtener el valor de "liked" del cuerpo de la solicitud
+        if user_question and bot_response:
+            feedback_instance = BotResponseFeedback.objects.create(
+                user_question=user_question,
+                bot_response=bot_response,
+                liked=liked  # Guardar el valor de "liked"
+            )
+            return JsonResponse({'message': 'Feedback received successfully.'})
+        else:
+            return JsonResponse({'error': 'Invalid data provided.'})
+    else:
+        return JsonResponse({'error': 'Invalid request method.'})
+    
+def feedback_like(request, response_id):
+    # Obtener la instancia de BotResponseFeedback asociada al ID response_id
+    response = get_object_or_404(BotResponseFeedback, pk=response_id)
+
+    # Incrementar el contador de likes
+    response.likes += 1
+    response.save()
+
+    # Devolver una respuesta JSON indicando que el "me gusta" fue registrado correctamente
+    return JsonResponse({'message': 'Like registrado correctamente.'})
+    
+def index(request):
+    # Consulta para obtener todas las respuestas del bot con sus likes
+    bot_responses = BotResponseFeedback.objects.all()
+
+    # Pasar los datos al contexto de la plantilla
+    context = {
+        'bot_responses': bot_responses,
+    }
+
+    # Renderizar la plantilla con el contexto
+    return render(request, 'chatbotungs/index.html', context)

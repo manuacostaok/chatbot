@@ -21,4 +21,6 @@ from chatbotungs import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('get_response/', views.get_response, name='get_response'),
+    path('feedback/', views.feedback, name='feedback'),  # Nueva ruta para la retroalimentación
+    path('admin/', admin.site.urls)
 ]

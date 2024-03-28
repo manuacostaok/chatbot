@@ -32,9 +32,13 @@ body {
     border-radius: 5px; /* Agregamos bordes redondeados */
 }
 
-button {
+#like-button{
+    width: 1cm;
+    color: red;
+}
+
+#send-button{
     width: 70px;
-    height: 100%;
     background-color: #4CAF50;
     color: white;
     border: none;
