@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from nltk.chat.util import Chat, reflections
 from django.http import JsonResponse
@@ -6,6 +7,13 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
 from .models import BotResponseFeedback
 import json
+
+
+import os
+from skimage import io, img_as_ubyte
+import numpy as np
+from skimage.metrics import structural_similarity as ssim
+from skimage import color,io, img_as_ubyte
 
 # Definir los pares de conversación y reflecciones
 mis_reflecciones = {
@@ -141,3 +149,46 @@ def index(request):
 
     # Renderizar la plantilla con el contexto
     return render(request, 'chatbotungs/index.html', context)
+
+
+@csrf_exempt
+def process_fingerprint_images(request):
+    if request.method == 'POST':
+        try:
+            # Obtener la imagen de la solicitud
+            image = request.FILES['image']
+
+            # Imprimir o registrar la ruta completa de la imagen local
+            local_image_path = os.path.join('staticfiles', 'img', 'huellas', 'imagen_local.tif')
+            print("Ruta de la imagen local:", local_image_path)
+
+            # Cargar la imagen local para comparar
+            local_image = io.imread(local_image_path)
+            print("Ruta de la imagen local:", local_image)
+            # Convertir las imágenes a escala de grises
+            image_gray = img_as_ubyte(color.rgb2gray(io.imread(image)))
+            local_image_gray = img_as_ubyte(color.rgb2gray(local_image))
+
+            # Imprimir o registrar las dimensiones de las imágenes para verificar que sean consistentes
+            print("Dimensiones de la imagen recibida:", image_gray.shape)
+            print("Dimensiones de la imagen local:", local_image_gray.shape)
+
+            # Calcular el índice de similitud estructural (SSIM) entre las imágenes
+            similarity_index = ssim(image_gray, local_image_gray)
+
+            # Definir un umbral de similitud
+            threshold = 0.95  # Umbral de similitud del 95%
+
+            # Comparar el índice de similitud con el umbral
+            if similarity_index >= threshold:
+                # Si la similitud es alta, las imágenes son consideradas iguales
+                return JsonResponse({'message': 'La imagen recibida es igual a la imagen local.'})
+            else:
+                # Si la similitud es baja, las imágenes son diferentes
+                return JsonResponse({'message': 'La imagen recibida es diferente a la imagen local.'})
+        except Exception as e:
+            # Si ocurre algún error, devolver una respuesta de error
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        # Si la solicitud no es POST, devolver un error de método no permitido
+        return JsonResponse({'error': 'Método no permitido'}, status=405)

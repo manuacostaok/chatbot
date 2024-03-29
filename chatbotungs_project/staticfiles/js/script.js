@@ -91,3 +91,30 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+// Función para enviar una imagen al servidor para su procesamiento
+function uploadImage() {
+    var formData = new FormData();
+    var imageInput = document.getElementById('image-input').files[0]; // Obtener la imagen del input
+    formData.append('image', imageInput);
+
+    fetch('/process_fingerprint_images/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')  // Obtener el token CSRF de las cookies
+        },
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // La imagen se procesó correctamente
+            alert('Procesamiento de imagen completado.');
+        } else {
+            // Hubo un error al procesar la imagen
+            alert('Error en el procesamiento de la imagen.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error en el procesamiento de la imagen.');
+    });
+}

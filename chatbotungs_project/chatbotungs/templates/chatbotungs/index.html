@@ -32,6 +32,20 @@
             <button id="send-button" onclick="sendMessage()">Enviar</button>
         </div>
     </div>
+    
+    <!-- Formulario para cargar imágenes de huellas digitales -->
+    <div id="image-upload-container">
+        <h2>Procesamiento de Imágenes de Huellas Digitales</h2>
+        <form id="image-upload-form" enctype="multipart/form-data">
+            <input type="file" id="image-input" name="image" accept=".tif, .tiff">
+            <button type="button" onclick="uploadImage()">Procesar Imagen</button>
+        </form>
+        <div id="image-display-container">
+            <!-- Aquí se mostrará la imagen cargada por el usuario -->
+            <img id="uploaded-image" src="{% static 'img/huellas/imagen_local' %}" alt="Imagen de huella digital">
+        </div>
+    </div>
+    
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 
