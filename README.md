@@ -104,18 +104,24 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 
 - instalar python : https://www.python.org/downloads/
 
-- instalar NLKT : pip install nltk
+- instalar bibliotecas : *pip install nltk, skimage, django y sklearn*
 
-- ejecutar desde consola: python chatbot.py
-
-- Para ejecutar la prueba del chat en el servidor ejecutar dentro de la carpeta del proyecto: python manage.py runserver
+- Para ejecutar de manera local muevase al directorio y ejecute en consola: *python chatbot.py*
+(desde esta prueba se le pasa un directorio para cargar ambas imagenes y comparar)
+- Para ejecutar la prueba del chat en el servidor django ejecutar dentro de la carpeta del proyecto: *python manage.py runserver*
+(desde esta prueba se puede cargar una imagen a comparar)
 
 ## Avances
 
 - Como avances en el chatbot tenemos la implementacion de Django como framework para poder hostear la app y probarla con una interface gráfica
 
-- Integramos machine learning con la librería scikit-learn para calcular la similitud del coseno entre la entrada del usuario y las preguntas predefinidas utilizando  previamente  la librería NLTK para el preprocesamiento de texto, la tokenización y la lematización, para entregnar al chatbot con valores de entrada predefinidos.
+- Integramos machine learning con la librería scikit-learn para calcular la similitud del coseno entre la entrada del usuario y las preguntas predefinidas utilizando  previamente  la librería NLTK para el preprocesamiento de texto, la tokenización y la lematización, para entregnar al chatbot con valores de entrada predefinidos. 
+Ademàs, usamos PCA para reducir la dimensionalidad de las imágenes de huellas digitales y la imagen local. 
+Luego, entrenamos un clasificador SVM con las características extraídas de la imagen local.
+Finalmente, utilizamos el clasificador para predecir si la huella digital es similar o diferente a la imagen local.
 
 - Estamos integrando el lector de huella digital, por ahora conseguimos un dataset de huellas dactilares La Base de Datos de Huellas Dactilares de la Competencia de Verificación de Huellas Dactilares (FVC2002) que es una colección de imágenes de huellas dactilares de alta calidad que se pueden utilizar para evaluaciones de algoritmos de verificación de huellas dactilares. Esta base de datos está disponible para fines académicos y de investigación.
 
-Lo siguiente será identificar una de las huellas como valida para login y hacer que el chatbot se encargue de ese trabajo
+Lo siguiente será identificar una de las huellas como valida para login y hacer que el chatbot se encargue de ese trabajo y aprenda mientras lo hace.
+
+- Hemos agregado un boton de like para las respuestas y estamos trabajando el feedback para que influya en la calidad de las respuestas en base a las preguntas

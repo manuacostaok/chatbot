@@ -166,6 +166,11 @@ def process_fingerprint_images(image_path):
         # Si la similitud es baja, las imágenes son diferentes
         print("La huella digital es diferente a la imagen local.")
         return {'message': 'La huella digital es diferente a la imagen local.'}
+    
+#En este ejemplo, primero usamos PCA para reducir la dimensionalidad de las imágenes de huellas digitales y la imagen local. 
+#    Luego, entrenamos un clasificador SVM con las características extraídas de la imagen local.
+#     Finalmente, utilizamos el clasificador para predecir si la huella digital es similar o diferente a la imagen local.
+   
 # Función para chatear con el usuario
 def chatear(respuesta_usuario):
     if respuesta_usuario.lower() == 'exit':
