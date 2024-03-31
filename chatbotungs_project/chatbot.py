@@ -112,7 +112,7 @@ def clasificar_intencion(respuesta_usuario):
 # Función para procesar las imágenes de huellas digitales
 def process_fingerprint_images(image_path):
     # Ruta de la imagen local
-    local_image_path = os.path.join('staticfiles', 'img', 'huellas', 'imagen_local.tif')
+    local_image_path = os.path.join('staticfiles', 'img', 'huella_registrada', 'imagen_local.tif')
     
     print("Cargando la imagen local...")
     try:
@@ -175,7 +175,7 @@ def chatear(respuesta_usuario):
             respuesta_bot = "Lo siento, no logro comprender la pregunta. Por favor, intenta proporcionar más detalles."
         elif "login huella" in respuesta_usuario.lower():
             # Llamar a la función process_fingerprint_images con la ruta del archivo de huella digital
-            respuesta_bot = process_fingerprint_images('./staticfiles/img/huellas/imagen_local.tif')
+            respuesta_bot = process_fingerprint_images('./staticfiles/img/huellas_dataset/101_2.tif')
         else:
             respuesta_bot = clasificar_intencion(respuesta_usuario)
     else: # Verificar si la entrada no está vacía
