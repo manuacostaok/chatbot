@@ -27,7 +27,7 @@ mis_reflecciones = {
 lemmatizer = WordNetLemmatizer()
 
 #setup array con palabras clave
-arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit']
+arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit','disculpa','perdon']
 # Pares de patrones y respuestas
 pares = [
     [
@@ -63,7 +63,7 @@ pares = [
         ["Para ampliar el servicio contacta con atención al cliente",]
     ],
     [
-        r"disculpa(.*)",
+        r"disculpa|perdon",
         ["Estoy aquí para ayudarte, no para perdonarte",]
     ],
     [

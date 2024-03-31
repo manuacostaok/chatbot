@@ -9,31 +9,34 @@ import io
 import json
 from skimage import color, io as skio, img_as_ubyte
 from skimage.metrics import structural_similarity as ssim
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from nltk.stem import WordNetLemmatizer
 from .models import BotResponseFeedback
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
 
 # Función para procesar las imágenes de huellas digitales
 from chatbot import process_fingerprint_images
+import tempfile
 
-# Definir los pares de conversación y reflecciones
+# Reflecciones para NLTK
 mis_reflecciones = {
     "ir": "fui",
-    "hola": "hey"
+    "hola": "hey",
 }
+
 
 # Definir el lematizador de NLTK
 lemmatizer = WordNetLemmatizer()
 
+#setup array con palabras clave
+arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit','disculpa','perdon']
 
+# Pares de patrones y respuestas
 pares = [
     [
-        r"(.*)se cayó el servicio(.*)|(.*)internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)|(.*)internet anda mal(.*)|(.*)me anda mal internet(.*)",
-        ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas. Si ya reinició el modem, espere por favor."]
+        r"(.*)se cayó el servicio(.*)|(.*)mi internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)",
+        ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas, si ya reinicio el modem aguarde"]
     ],
     [
        r"(.*)Como puedo proteger mi red Wi-Fi(.*)|(.*)conectarse sin autorización?" ,
@@ -53,46 +56,56 @@ pares = [
     ],
     [
         r"(.*)cuando hay que pagar la factura(.*)",
-        ["Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual. También puedes adherirla al débito automático."]
+        ["Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",]
     ],
     [
         r"(.*)ya reinicie mi modem y sigo sin internet(.*)",
-        ["A continuación, ingrese su número de DNI para poder chequear que todo esté en orden. De no ser así, nos pondremos en contacto por su teléfono celular para brindarle una mejor atención."]
+        ["A continuación, digite su número de DNI para poder chequear que todo esté en orden, de no ser así nos estaremos contactando por su teléfono celular para brindarle mejor atención ",]
     ],
     [
         r"(.*)ampliar el servicio",
-        ["Para ampliar el servicio, contacta con atención al cliente."]
+        ["Para ampliar el servicio contacta con atención al cliente",]
     ],
     [
-        r"disculpa(.*)",
-        ["Estoy aquí para ayudarte, no para perdonarte."]
+        r"disculpa|perdon",
+        ["Estoy aquí para ayudarte, no para perdonarte",]
     ],
     [
         r"hola|hey|buenas",
-        ["Hola, ¿en qué puedo ayudarte?"]
+        ["Hola, ¿en qué puedo ayudarte?",]
     ],
     [
         r"(.*)que quieres?|(.*)como estas?",
-        ["Nada, estoy bien, solo quiero ayudarte. Gracias."]
+        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
     ],
     [
         r"nada",
-        ["No dijiste nada. ¿Podrías volver a intentarlo?"]
+        ["No dijiste nada, ¿podrías volver a intentarlo?",]
     ],
     [
         r"(.*)creado?",
-        ["Fui creado luego del Big Bang, pero mi código fuente fue descubierto en 2024."]
+        ["Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",]
     ],
     [
         r"salir|chau|adios",
-        ["Chau, espero haberte ayudado. Recuerda que para salir del chat debes escribir 'EXIT'."]
+        ["Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'"]
     ],
 ]
 
+
+
 @ensure_csrf_cookie
 def index(request):
-    return render(request, 'chatbotungs/index.html')
+    # Consulta para obtener todas las respuestas del bot con sus likes
+    bot_responses = BotResponseFeedback.objects.all()
 
+    # Pasar los datos al contexto de la plantilla
+    context = {
+        'bot_responses': bot_responses,
+    }
+
+    # Renderizar la plantilla con el contexto
+    return render(request, 'chatbotungs/index.html', context)
 
 @csrf_exempt
 def get_response(request):
@@ -143,61 +156,36 @@ def feedback_like(request, response_id):
 
     # Devolver una respuesta JSON indicando que el "me gusta" fue registrado correctamente
     return JsonResponse({'message': 'Like registrado correctamente.'})
-    
-def index(request):
-    # Consulta para obtener todas las respuestas del bot con sus likes
-    bot_responses = BotResponseFeedback.objects.all()
-
-    # Pasar los datos al contexto de la plantilla
-    context = {
-        'bot_responses': bot_responses,
-    }
-
-    # Renderizar la plantilla con el contexto
-    return render(request, 'chatbotungs/index.html', context)
-
-# Función para preprocesar el texto del usuario
-def preprocess_text(sentence):
-    # Tokenización
-    tokens = word_tokenize(sentence)
-    # Lematización
-    lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens]
-    return " ".join(lemmatized_tokens)
-
-# Crear un vectorizador TF-IDF para clasificación de intenciones
-vectorizer = TfidfVectorizer(preprocessor=preprocess_text)
-preguntas = [pair[0] for pair in pares]
-preguntas_vect = vectorizer.fit_transform(preguntas)
-
-# Función para clasificar la intención del usuario usando scikit-learn
-def clasificar_intencion(respuesta_usuario):
-    respuesta_usuario = preprocess_text(respuesta_usuario)
-    respuesta_usuario_vect = vectorizer.transform([respuesta_usuario])
-    similitud = cosine_similarity(respuesta_usuario_vect, preguntas_vect)
-    idx = similitud.argmax()
-    return pares[idx][1][0]
-
-
-
 @csrf_exempt
 def process_fingerprint_images_web(request):
     if request.method == 'POST':
         try:
-            # Obtener la imagen de la solicitud
-            image = request.FILES['image']
+            # Obtener el archivo de la solicitud
+            image_file = request.FILES.get('image')
 
-            # Procesar la imagen de la huella digital utilizando la función adecuada
-            result = process_fingerprint_images(image)  # Llamar a la función correcta
+            if image_file:
+                # Crear un archivo temporal para almacenar la imagen
+                with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                    # Escribir el contenido del archivo de imagen en el archivo temporal
+                    for chunk in image_file.chunks():
+                        temp_file.write(chunk)
+                
+                # Procesar el archivo temporal de la huella digital utilizando la función adecuada
+                result = process_fingerprint_images(temp_file.name)  # Pasar el nombre del archivo
+                
+                # Eliminar el archivo temporal después de procesarlo
+                os.unlink(temp_file.name)
 
-            # Devolver la respuesta como JSON
-            return JsonResponse({'result': result})
+                # Devolver la respuesta de la función como JSON utilizando JsonResponse
+                return JsonResponse(result)
+            else:
+                return JsonResponse({'error': 'No se proporcionó ningún archivo de imagen'}, status=400)
         except Exception as e:
-            # Si ocurre algún error, devolver una respuesta de error
-            return JsonResponse({'error': str(e)}, status=500)
+            error_response = {'error': str(e)}
+            return JsonResponse(error_response, status=500)
     else:
         # Si la solicitud no es POST, devolver un error de método no permitido
         return JsonResponse({'error': 'Método no permitido'}, status=405)
-    
 
 # Vista principal para el chatbot
 def chatbot_view(request):
