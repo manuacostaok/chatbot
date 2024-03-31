@@ -114,7 +114,7 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 
 - Como avances en el chatbot tenemos la implementacion de Django como framework para poder hostear la app y probarla con una interface gráfica
 
-- Integramos machine learning con la biblioteca (...)
+- Integramos machine learning con la librería scikit-learn para calcular la similitud del coseno entre la entrada del usuario y las preguntas predefinidas utilizando  previamente  la librería NLTK para el preprocesamiento de texto, la tokenización y la lematización, para entregnar al chatbot con valores de entrada predefinidos.
 
 - Estamos integrando el lector de huella digital, por ahora conseguimos un dataset de huellas dactilares La Base de Datos de Huellas Dactilares de la Competencia de Verificación de Huellas Dactilares (FVC2002) que es una colección de imágenes de huellas dactilares de alta calidad que se pueden utilizar para evaluaciones de algoritmos de verificación de huellas dactilares. Esta base de datos está disponible para fines académicos y de investigación.
 
