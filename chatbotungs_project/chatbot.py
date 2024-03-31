@@ -192,7 +192,7 @@ if __name__ == "__main__":
         
         if isinstance(respuesta_bot, dict):
             # Si la respuesta es un diccionario, imprimir el mensaje de error
-            print(respuesta_bot.get('error', 'Error desconocido.'))
+            print(respuesta_bot.get('error', 'Error desconocido de la funcion main.'))
         elif respuesta_bot.lower() == "exit":
             # Si la respuesta del bot es "exit", salir del bucle
             print("¡Hasta luego!")

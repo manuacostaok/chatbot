@@ -17,6 +17,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from .models import BotResponseFeedback
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
 
+# Función para procesar las imágenes de huellas digitales
+from chatbot import process_fingerprint_images
+
 # Definir los pares de conversación y reflecciones
 mis_reflecciones = {
     "ir": "fui",
@@ -174,52 +177,27 @@ def clasificar_intencion(respuesta_usuario):
     idx = similitud.argmax()
     return pares[idx][1][0]
 
-# Función para procesar las imágenes de huellas digitales
+
+
 @csrf_exempt
-def process_fingerprint_images(request):
+def process_fingerprint_images_web(request):
     if request.method == 'POST':
         try:
             # Obtener la imagen de la solicitud
             image = request.FILES['image']
-            
-            # Ruta de la imagen local
-            local_image_path = os.path.join('staticfiles', 'img', 'huellas', 'imagen_local.tif')
-            
-            # Cargar la imagen local para comparar
-            local_image = skio.imread(local_image_path)
-            # Convertir a RGB si es necesario
-            if local_image.ndim != 3 or local_image.shape[2] != 3:
-                local_image = color.gray2rgb(local_image)
-            
-            # Cargar la imagen de huella digital para comparar
-            fingerprint_image = skio.imread(image)
-            # Convertir a RGB si es necesario
-            if fingerprint_image.ndim != 3 or fingerprint_image.shape[2] != 3:
-                fingerprint_image = color.gray2rgb(fingerprint_image)
-            
-            # Convertir ambas imágenes a escala de grises
-            local_image_gray = color.rgb2gray(local_image)
-            fingerprint_image_gray = color.rgb2gray(fingerprint_image)
-            
-            # Calcular el índice de similitud estructural (SSIM) entre las imágenes
-            similarity_index = ssim(local_image_gray, fingerprint_image_gray, data_range=1.0)
-            
-            # Definir un umbral de similitud
-            threshold = 0.95  # Umbral de similitud del 95%
-            
-            # Comparar el índice de similitud con el umbral
-            if similarity_index >= threshold:
-                # Si la similitud es alta, las imágenes son consideradas iguales
-                return JsonResponse({'message': 'La huella digital es similar a la imagen local.'})
-            else:
-                # Si la similitud es baja, las imágenes son diferentes
-                return JsonResponse({'message': 'La huella digital es diferente a la imagen local.'})
+
+            # Procesar la imagen de la huella digital utilizando la función adecuada
+            result = process_fingerprint_images(image)  # Llamar a la función correcta
+
+            # Devolver la respuesta como JSON
+            return JsonResponse({'result': result})
         except Exception as e:
             # Si ocurre algún error, devolver una respuesta de error
             return JsonResponse({'error': str(e)}, status=500)
     else:
         # Si la solicitud no es POST, devolver un error de método no permitido
         return JsonResponse({'error': 'Método no permitido'}, status=405)
+    
 
 # Vista principal para el chatbot
 def chatbot_view(request):

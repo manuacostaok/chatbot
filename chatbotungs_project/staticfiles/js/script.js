@@ -93,28 +93,25 @@ function getCookie(name) {
 }
 // Función para enviar una imagen al servidor para su procesamiento
 function uploadImage() {
-    var formData = new FormData();
-    var imageInput = document.getElementById('image-input').files[0]; // Obtener la imagen del input
-    formData.append('image', imageInput);
+    // Obtener el formulario y la imagen seleccionada por el usuario
+    var form = document.getElementById('image-upload-form');
+    var formData = new FormData(form);
 
-    fetch('/process_fingerprint_images/', {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken')  // Obtener el token CSRF de las cookies
-        },
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            // La imagen se procesó correctamente
-            alert('Procesamiento de imagen completado.');
+    // Realizar una solicitud AJAX al servidor
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/process_fingerprint_images_web/', true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // La solicitud fue exitosa, puedes hacer algo con la respuesta si es necesario
+            console.log(xhr.responseText);
         } else {
-            // Hubo un error al procesar la imagen
-            alert('Error en el procesamiento de la imagen.');
+            // Hubo un error en la solicitud
+            console.error('Error al procesar la imagen:', xhr.statusText);
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error en el procesamiento de la imagen.');
-    });
+    };
+    xhr.onerror = function () {
+        // Hubo un error de red
+        console.error('Error de red al procesar la imagen.');
+    };
+    xhr.send(formData);
 }
