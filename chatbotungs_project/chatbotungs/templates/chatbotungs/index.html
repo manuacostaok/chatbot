@@ -10,12 +10,7 @@
 </head>
 
 <body>
-    <h1>Respuestas del Bot con Likes</h1>
-    <ul>
-        {% for response in bot_responses %}
-            <li>{{ response.bot_response }} - Likes: {{ response.likes }}</li>
-        {% endfor %}
-    </ul>
+    
     <div id="chat-container">
         <div id="chat-box">
             <!-- Mensaje de bienvenida del bot con token CSRF -->
@@ -33,13 +28,13 @@
         </div>
     </div>
     <!-- Formulario para cargar imágenes de huellas digitales -->
-<div id="image-upload-container">
-    <h2>Procesamiento de Imágenes de Huellas Digitales</h2>
-    <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
-        <input type="file" id="image-input" name="image" accept=".tif, .tiff">
-        <button type="submit">Procesar Imagen</button>
-    </form>
-</div>
+    <div id="image-upload-container">
+        <h2>Procesamiento de Imágenes de Huellas Digitales</h2>
+        <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
+            <input type="file" id="image-input" name="image" accept=".tif, .tiff">
+            <button type="submit">Procesar Imagen</button>
+        </form>
+    </div>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 

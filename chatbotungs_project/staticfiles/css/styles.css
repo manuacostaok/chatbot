@@ -11,6 +11,14 @@ body {
     border-radius: 5px;
     overflow: hidden;
 }
+#image-upload-container {
+    max-width: 400px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
 
 #chat-box {
     height: 300px;
