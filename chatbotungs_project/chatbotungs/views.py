@@ -1,25 +1,31 @@
-
 from django.shortcuts import render
-from nltk.chat.util import Chat, reflections
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
-from chatbot import chatear  # Importa la función chatear desde script chatbot.py
-from .models import BotResponseFeedback
-import json
-
-
+# Importar las librerías necesarias
+import re
 import os
-from skimage import io, img_as_ubyte
-import numpy as np
+import io
+import json
+from skimage import color, io as skio, img_as_ubyte
 from skimage.metrics import structural_similarity as ssim
-from skimage import color,io, img_as_ubyte
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+from .models import BotResponseFeedback
+from chatbot import chatear  # Importa la función chatear desde script chatbot.py
 
 # Definir los pares de conversación y reflecciones
 mis_reflecciones = {
     "ir": "fui",
     "hola": "hey"
 }
+
+# Definir el lematizador de NLTK
+lemmatizer = WordNetLemmatizer()
+
 
 pares = [
     [
@@ -79,9 +85,6 @@ pares = [
         ["Chau, espero haberte ayudado. Recuerda que para salir del chat debes escribir 'EXIT'."]
     ],
 ]
-
-# Inicializar el chat con los pares y reflecciones
-chat = Chat(pares, mis_reflecciones)
 
 @ensure_csrf_cookie
 def index(request):
@@ -150,45 +153,98 @@ def index(request):
     # Renderizar la plantilla con el contexto
     return render(request, 'chatbotungs/index.html', context)
 
+# Función para preprocesar el texto del usuario
+def preprocess_text(sentence):
+    # Tokenización
+    tokens = word_tokenize(sentence)
+    # Lematización
+    lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens]
+    return " ".join(lemmatized_tokens)
 
+# Crear un vectorizador TF-IDF para clasificación de intenciones
+vectorizer = TfidfVectorizer(preprocessor=preprocess_text)
+preguntas = [pair[0] for pair in pares]
+preguntas_vect = vectorizer.fit_transform(preguntas)
+
+# Función para clasificar la intención del usuario usando scikit-learn
+def clasificar_intencion(respuesta_usuario):
+    respuesta_usuario = preprocess_text(respuesta_usuario)
+    respuesta_usuario_vect = vectorizer.transform([respuesta_usuario])
+    similitud = cosine_similarity(respuesta_usuario_vect, preguntas_vect)
+    idx = similitud.argmax()
+    return pares[idx][1][0]
+
+# Función para procesar las imágenes de huellas digitales
 @csrf_exempt
 def process_fingerprint_images(request):
     if request.method == 'POST':
         try:
             # Obtener la imagen de la solicitud
             image = request.FILES['image']
-
-            # Imprimir o registrar la ruta completa de la imagen local
+            
+            # Ruta de la imagen local
             local_image_path = os.path.join('staticfiles', 'img', 'huellas', 'imagen_local.tif')
-            print("Ruta de la imagen local:", local_image_path)
-
+            
             # Cargar la imagen local para comparar
-            local_image = io.imread(local_image_path)
-            print("Ruta de la imagen local:", local_image)
-            # Convertir las imágenes a escala de grises
-            image_gray = img_as_ubyte(color.rgb2gray(io.imread(image)))
-            local_image_gray = img_as_ubyte(color.rgb2gray(local_image))
-
-            # Imprimir o registrar las dimensiones de las imágenes para verificar que sean consistentes
-            print("Dimensiones de la imagen recibida:", image_gray.shape)
-            print("Dimensiones de la imagen local:", local_image_gray.shape)
-
+            local_image = skio.imread(local_image_path)
+            # Convertir a RGB si es necesario
+            if local_image.ndim != 3 or local_image.shape[2] != 3:
+                local_image = color.gray2rgb(local_image)
+            
+            # Cargar la imagen de huella digital para comparar
+            fingerprint_image = skio.imread(image)
+            # Convertir a RGB si es necesario
+            if fingerprint_image.ndim != 3 or fingerprint_image.shape[2] != 3:
+                fingerprint_image = color.gray2rgb(fingerprint_image)
+            
+            # Convertir ambas imágenes a escala de grises
+            local_image_gray = color.rgb2gray(local_image)
+            fingerprint_image_gray = color.rgb2gray(fingerprint_image)
+            
             # Calcular el índice de similitud estructural (SSIM) entre las imágenes
-            similarity_index = ssim(image_gray, local_image_gray)
-
+            similarity_index = ssim(local_image_gray, fingerprint_image_gray, data_range=1.0)
+            
             # Definir un umbral de similitud
             threshold = 0.95  # Umbral de similitud del 95%
-
+            
             # Comparar el índice de similitud con el umbral
             if similarity_index >= threshold:
                 # Si la similitud es alta, las imágenes son consideradas iguales
-                return JsonResponse({'message': 'La imagen recibida es igual a la imagen local.'})
+                return JsonResponse({'message': 'La huella digital es similar a la imagen local.'})
             else:
                 # Si la similitud es baja, las imágenes son diferentes
-                return JsonResponse({'message': 'La imagen recibida es diferente a la imagen local.'})
+                return JsonResponse({'message': 'La huella digital es diferente a la imagen local.'})
         except Exception as e:
             # Si ocurre algún error, devolver una respuesta de error
             return JsonResponse({'error': str(e)}, status=500)
     else:
         # Si la solicitud no es POST, devolver un error de método no permitido
         return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+# Vista principal para el chatbot
+def chatbot_view(request):
+    if request.method == 'POST':
+        try:
+            # Obtener la respuesta del usuario de la solicitud
+            respuesta_usuario = request.POST.get('user_input', '')
+            respuesta_bot = ''  # Inicializar la respuesta del bot
+
+            if respuesta_usuario.lower() == 'exit':
+                respuesta_bot = "exit"
+            elif respuesta_usuario.strip():
+                if len(respuesta_usuario.split()) == 1 and respuesta_usuario not in arrayOneWord:
+                    respuesta_bot = "Lo siento, no logro comprender la pregunta. Por favor, intenta proporcionar más detalles."
+                elif "login huella" in respuesta_usuario.lower():
+                    # Llamar a la función process_fingerprint_images con la ruta del archivo de huella digital
+                    respuesta_bot = process_fingerprint_images(request)
+                else:
+                    respuesta_bot = clasificar_intencion(respuesta_usuario)
+            else:
+                respuesta_bot = "No dijiste nada, ¿podrías volver a intentarlo?"
+
+            return JsonResponse({'response': respuesta_bot})
+        except Exception as e:
+            # Manejar errores
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return render(request, 'chatbot.html')

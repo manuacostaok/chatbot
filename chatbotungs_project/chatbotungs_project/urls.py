@@ -21,7 +21,7 @@ from chatbotungs import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('get_response/', views.get_response, name='get_response'),
-    path('feedback/', views.feedback, name='feedback'),  # Nueva ruta para la retroalimentación
+    path('feedback/', views.feedback, name='feedback'),  # Ruta para la retroalimentación
     path('process_fingerprint_images/', views.process_fingerprint_images, name='process_fingerprint_images'),
     path('admin/', admin.site.urls)
 ]

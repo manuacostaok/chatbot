@@ -176,6 +176,7 @@ def chatear(respuesta_usuario):
         elif "login huella" in respuesta_usuario.lower():
             # Llamar a la función process_fingerprint_images con la ruta del archivo de huella digital
             respuesta_bot = process_fingerprint_images('./staticfiles/img/huellas_dataset/101_2.tif')
+            print("Bot:", respuesta_bot)  # Imprimir la respuesta del bot
         else:
             respuesta_bot = clasificar_intencion(respuesta_usuario)
     else: # Verificar si la entrada no está vacía
@@ -185,13 +186,18 @@ def chatear(respuesta_usuario):
 
 # Iniciar el chat
 if __name__ == "__main__":
-    respuesta_usuario = input("Usuario: ")  # Obtener la respuesta del usuario
-    respuesta_bot = chatear(respuesta_usuario)  # Llamar a la función chatear con la respuesta del usuario como argumento
-    if isinstance(respuesta_bot, dict):
-        # Si la respuesta es un diccionario, imprimir el mensaje de error
-        print(respuesta_bot.get('error', 'Error desconocido de la funcion main '))
-    elif respuesta_bot.lower() == "exit":
-        print("¡Hasta luego!")
-    else:
-        # Imprimir la respuesta del chat
-        print("Bot:", respuesta_bot)
+    while True:  # Bucle infinito para mantener la conversación
+        respuesta_usuario = input("Usuario: ")  # Obtener la respuesta del usuario
+        respuesta_bot = chatear(respuesta_usuario)  # Llamar a la función chatear con la respuesta del usuario como argumento
+        
+        if isinstance(respuesta_bot, dict):
+            # Si la respuesta es un diccionario, imprimir el mensaje de error
+            print(respuesta_bot.get('error', 'Error desconocido.'))
+        elif respuesta_bot.lower() == "exit":
+            # Si la respuesta del bot es "exit", salir del bucle
+            print("¡Hasta luego!")
+            break
+        else:
+            # Imprimir la respuesta del bot
+            print("Bot:", respuesta_bot)
+        
