@@ -9,7 +9,8 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from sklearn.svm import SVC #machinelearn
+from sklearn.decomposition import PCA #machinelearn
 # Importar las reflecciones y el chat de NLTK
 from nltk.chat.util import reflections
 
@@ -109,7 +110,6 @@ def clasificar_intencion(respuesta_usuario):
     idx = similitud.argmax()
     return pares[idx][1][0]
 
-# Función para procesar las imágenes de huellas digitales
 def process_fingerprint_images(image_path):
     # Ruta de la imagen local
     local_image_path = os.path.join('staticfiles', 'img', 'huella_registrada', 'imagen_local.tif')
@@ -142,6 +142,7 @@ def process_fingerprint_images(image_path):
     
     # Convertir ambas imágenes a escala de grises
     local_image_gray = color.rgb2gray(local_image)
+    print("Forma de local_image_gray:", local_image_gray.shape)  # Agregar este print para verificar la forma
     fingerprint_image_gray = color.rgb2gray(fingerprint_image)
     print("Imágenes convertidas a escala de grises.")
     
@@ -165,7 +166,6 @@ def process_fingerprint_images(image_path):
         # Si la similitud es baja, las imágenes son diferentes
         print("La huella digital es diferente a la imagen local.")
         return {'message': 'La huella digital es diferente a la imagen local.'}
-
 # Función para chatear con el usuario
 def chatear(respuesta_usuario):
     if respuesta_usuario.lower() == 'exit':

@@ -11,12 +11,12 @@ body {
     border-radius: 5px;
     overflow: hidden;
 }
+
 #image-upload-container {
-    max-width: 400px;
-    margin: 50px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #f2f2f2;
 }
 
 
