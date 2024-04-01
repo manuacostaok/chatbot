@@ -29,10 +29,11 @@
     </div>
     <!-- Formulario para cargar imágenes de huellas digitales -->
     <div id="chat-container">
-        <h2>Procesamiento de Imágenes de Huellas Digitales</h2>
+        <h2>Login de huella digital</h2>
         <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
+            <p> Seleccione la imagen de su huella digital registrada</p>
             <input type="file" id="image-input" name="image" accept=".tif, .tiff">
-            <button type="submit">Procesar Imagen</button>
+            <button type="submit">Login</button>
         </form>
     </div>
     <script src="{% static 'js/script.js' %}"></script>
