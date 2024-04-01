@@ -1,7 +1,7 @@
 from django import forms
 from .models import Usuario
 
-class RegistroUsuarioForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['nombre', 'correo_electronico', 'imagen']
+class RegistroUsuarioForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    correo_electronico = forms.EmailField()
+    imagen = forms.ImageField()

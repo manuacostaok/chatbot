@@ -14,7 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem import WordNetLemmatizer
 from .models import BotResponseFeedback
 from .models import Usuario
-from chatbot import chatear  # Importa la función chatear desde script chatbot.py
+from chatbot import chatear,clasificar_intencion  # Importa la función chatear desde script chatbot.py
 from .forms import RegistroUsuarioForm
 # Función para procesar las imágenes de huellas digitales
 from chatbot import process_fingerprint_images

@@ -38,6 +38,9 @@
     </div>
     <div id="registro">
         <h1>Registro de Usuario</h1>
+        {% if mensaje_alerta %}
+        <div class="alert alert-success">{{ mensaje_alerta }}</div>
+        {% endif %}
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
