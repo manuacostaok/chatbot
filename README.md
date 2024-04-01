@@ -125,3 +125,46 @@ Finalmente, utilizamos el clasificador para predecir si la huella digital es sim
 Lo siguiente será identificar una de las huellas como valida para login y hacer que el chatbot se encargue de ese trabajo y aprenda mientras lo hace.
 
 - Hemos agregado un boton de like para las respuestas y estamos trabajando el feedback para que influya en la calidad de las respuestas en base a las preguntas
+
+
+## Principio de Consentimiento para el Procesamiento de Huellas Digitales y Uso del Bot de Machine Learning
+
+-Objetivo:
+
+El presente documento tiene como objetivo informarte sobre el uso de huellas digitales de ejemplo (FCV2002) y el uso de un bot de machine learning en nuestro sistema, así como obtener tu consentimiento para dicho uso.
+
+-Uso de Huellas Digitales de Ejemplo (FCV2002):
+*(A pesar de que las huellas se encuentren disponibles para analizar decidimos realizar este disclaimer de ejemplo)*
+Las huellas digitales de ejemplo (FCV2002) son utilizadas únicamente con propósitos demostrativos y de prueba en nuestro sistema.
+Las huellas digitales de ejemplo (FCV2002) no se almacenan de forma permanente y son eliminadas después de su uso con fines demostrativos. 
+Nos comprometemos a no utilizar ni compartir las huellas digitales de ejemplo (FCV2002) con terceros para fines comerciales o de identificación
+Uso del Bot de Machine Learning:
+
+-El bot de machine learning será utilizado para proporcionar asistencia y resolver consultas relacionadas con nuestros servicios.
+La información proporcionada al bot será utilizada únicamente con fines demostrativos y de mejora del sistema.
+Nos comprometemos a proteger tu privacidad y no utilizar la información proporcionada al bot con fines comerciales o de identificación.
+
+# Requisitos de sistema
+
+*Requisitos del Sistema*
+
+- Python: La aplicación requiere Python 3.x instalado en el sistema. Se recomienda utilizar la última versión estable de Python.
+
+- Bibliotecas Python:
+
+- scikit-image: La aplicación utiliza la biblioteca scikit-image para el procesamiento de imágenes y el cálculo del Índice de Similitud Estructural (SSIM).
+- Django: Se utiliza Django para manejar las solicitudes HTTP y las respuestas JSON.
+- NLTK: La aplicación hace uso de NLTK para el preprocesamiento de texto y la clasificación de intenciones del usuario.
+- scikit-learn: Se requiere scikit-learn para la clasificación de intenciones y el análisis de datos.
+
+- Sistema Operativo: La aplicación es compatible con sistemas operativos Windows, macOS y Linux.
+
+- Espacio en Disco: Se recomienda disponer de al menos 500 MB de espacio en disco para la instalación y el almacenamiento de datos de la aplicación.
+
+- Memoria RAM: Se recomienda contar con al menos 2 GB de memoria RAM para un rendimiento óptimo de la aplicación.
+
+- Acceso a Internet: La aplicación puede requerir acceso a Internet para algunas funcionalidades, como la descarga de recursos adicionales o la actualización de datos.
+
+- Permisos de Archivo: Asegúrate de tener los permisos necesarios para leer y escribir archivos en el sistema de archivos donde se ejecutará la aplicación.
+
+- Entorno Virtual (Opcional): Se recomienda utilizar un entorno virtual para aislar las dependencias de la aplicación y evitar conflictos con otras bibliotecas o versiones de Python instaladas en el sistema
