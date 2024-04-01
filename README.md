@@ -94,7 +94,8 @@ Luego de la búsqueda de información realizada para llevar a cabo los primeros 
 
 - Python y librerías asociadas para la implementación de IA, en este caso NLTK.
 
-- - NLKT  (Natural Language Toolkit)
+-  NLKT  (Natural Language Toolkit)
+
 El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conjunto de bibliotecas y programas para el procesamiento del lenguaje natural (PLN) simbólico y estadísticos para el lenguaje de programación Python. NLTK incluye demostraciones gráficas y datos de muestra. Se acompaña de un libro que explica los conceptos subyacentes a las tareas de procesamiento del lenguaje compatibles el toolkit,3​además de programas de ejemplo.4​NLTK está destinado a apoyar la investigación y la enseñanza en procesamiento de lenguaje natural (PLN) o áreas muy relacionadas, que incluyen la lingüística empírica, las ciencias cognitivas, la inteligencia artificial, la recuperación de información, y el aprendizaje de la máquina.5​NLTK se ha utilizado con éxito como herramienta de enseñanza, como una herramienta de estudio individual, y como plataforma para los sistemas de investigación de prototipos y construcción.
 
 - Django como framework 
@@ -141,7 +142,7 @@ _El presente documento tiene como objetivo informarte sobre el uso de huellas di
 Las huellas digitales de ejemplo (FCV2002) son utilizadas únicamente con propósitos demostrativos y de prueba en nuestro sistema.
 Las huellas digitales de ejemplo (FCV2002) no se almacenan de forma permanente y son eliminadas después de su uso con fines demostrativos. 
 Nos comprometemos a no utilizar ni compartir las huellas digitales de ejemplo (FCV2002) con terceros para fines comerciales o de identificación
-Uso del Bot de Machine Learning:
+- Uso del Bot :
 
 - El bot de machine learning será utilizado para proporcionar asistencia y resolver consultas relacionadas con nuestros servicios.
 La información proporcionada al bot será utilizada únicamente con fines demostrativos y de mejora del sistema.
