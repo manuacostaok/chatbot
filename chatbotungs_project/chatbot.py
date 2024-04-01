@@ -32,40 +32,40 @@ arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit']
 # Pares de patrones y respuestas
 pares = [
     [
-        r"(.*)se cayó el servicio(.*)|(.*)mi internet no anda(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)",
-        ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas, si ya reinicio el modem aguarde"]
+        r"(.*)se cayó el servicio(.*)|(.*)mi internet no funciona(.*)|(.*)no me anda internet(.*)|(.*)no tengo internet(.*)|(.*)problemas de conexion",
+        ["Sentimos ese fallo, puede reiniciar su modem desenchufándolo por unos segundos y dejando que las luces enciendan, estaremos chequeando que nuestro sistema no tenga problemas, si ya reinicio el modem aguarde unos momentos."]
     ],
     [
        r"(.*)Como puedo proteger mi red Wi-Fi(.*)|(.*)conectarse sin autorización?" ,
        ["Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos."]
     ],
     [
-        r"(.*)Mi conexión a internet es más lenta en ciertas habitaciones de mi casa(.*)",
+        r"(.*)lento|(.*)¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?(.*)|(.*)Mi internet anda lento(.*)|(.*)Mi conexión a internet es más lenta en ciertas habitaciones de mi casa(.*)",
         ["Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas."]
     ],
     [
-        r"¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?|(.*)internet lento(.*)",
-        ["La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo."]
-    ],
-    [
-        r"(.*)bloquear ciertos sitios web en mi red(.*)",
+        r"(.*)bloquear ciertos sitios web en mi red(.*)|(.*)seguridad(.*)",
         ["Puedes bloquear ciertos sitios web en tu red Wi-Fi utilizando la función de control parental en tu enrutador o utilizando software de filtrado de contenido. Consulta la documentación de tu enrutador para obtener instrucciones específicas."]
     ],
     [
-        r"(.*)cuando hay que pagar la factura(.*)",
-        ["Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",]
+        r"(.*)cuando hay que pagar la factura(.*)|(.*)Informacion de pago(.*)",
+        ["La boleta de internet se abona el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual. También puede adherirla al débito automático.",]
     ],
     [
-        r"(.*)ya reinicie mi modem y sigo sin internet(.*)",
-        ["A continuación, digite su número de DNI para poder chequear que todo esté en orden, de no ser así nos estaremos contactando por su teléfono celular para brindarle mejor atención ",]
+        r"(.*)ya reinicie mi modem y sigo sin internet(.*)|(.*)no hay mejoras|(.*)aun sigo sin internet",
+        ["Lamentamos oír eso. A continuación, digite su número de DNI para poder chequear que todo esté en orden, de no ser así nos estaremos contactando por su teléfono celular para brindarle mejor atención.",]
     ],
     [
         r"(.*)ampliar el servicio",
-        ["Para ampliar el servicio contacta con atención al cliente",]
+        ["Para ampliar el servicio contacta con atención al cliente.",]
+    ],
+    [
+        r"(.*)atencion al cliente|(.*)ayuda|(.*)contacto",
+        ["Por cualquier tipo de reclamo o consulta, sugerimos hacerlo por los canales oficiales. De igual manera un representante lo estara contactando a la brevedad",]
     ],
     [
         r"disculpa(.*)",
-        ["Estoy aquí para ayudarte, no para perdonarte",]
+        ["Estoy aquí para ayudarte, no para perdonarte.",]
     ],
     [
         r"hola|hey|buenas",
@@ -73,19 +73,27 @@ pares = [
     ],
     [
         r"(.*)que quieres?|(.*)como estas?",
-        ["Nada, estoy bien, solo quiero ayudarte, gracias",]
+        ["Nada, estoy bien, solo quiero ayudarte, gracias.",]
     ],
     [
         r"nada",
-        ["No dijiste nada, ¿podrías volver a intentarlo?",]
+        ["No dijiste nada, ¿Podrías volver a intentarlo?",]
+    ],
+    [
+        r"(.*)gracias|(.*)ok|(.*)bueno",
+        ["Espero haber sido de ayuda. No dudes en volver a consultarme.",]
     ],
     [
         r"(.*)creado?",
-        ["Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",]
+        ["Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024.",]
     ],
     [
         r"salir|chau|adios",
-        ["Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'"]
+        ["Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'."]
+    ],
+    [
+        r"(.*)estado de mi cuenta(.*)",
+        ["En breve enviaremos a su casilla de correo electrónico indicada un resumen con el estado de su cuenta. Muchas gracias.",]
     ],
 ]
 
