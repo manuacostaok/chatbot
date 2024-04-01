@@ -1,3 +1,6 @@
+<a href="#"><img width="100%" height="auto" src="https://i.imgur.com/iXuL1HG.png" height="175px"/></a>
+
+
 # Chatbot
 Repositorio dedicado al chatbot pedido para el Trabajo Práctico Inicial de la materia Laboratorio de Construcción de Software.
 
