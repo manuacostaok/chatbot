@@ -36,6 +36,14 @@
             <button type="submit">Login</button>
         </form>
     </div>
+    <div id="registro">
+        <h1>Registro de Usuario</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 

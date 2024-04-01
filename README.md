@@ -125,25 +125,25 @@ Finalmente, utilizamos el clasificador para predecir si la huella digital es sim
 
 - Estamos integrando el lector de huella digital, por ahora conseguimos un dataset de huellas dactilares La Base de Datos de Huellas Dactilares de la Competencia de Verificación de Huellas Dactilares (FVC2002) que es una colección de imágenes de huellas dactilares de alta calidad que se pueden utilizar para evaluaciones de algoritmos de verificación de huellas dactilares. Esta base de datos está disponible para fines académicos y de investigación.
 
-Lo siguiente será identificar una de las huellas como valida para login y hacer que el chatbot se encargue de ese trabajo y aprenda mientras lo hace.
+- Lo siguiente será identificar una de las huellas como valida para login y hacer que el chatbot se encargue de ese trabajo y aprenda mientras lo hace.
 
 - Hemos agregado un boton de like para las respuestas y estamos trabajando el feedback para que influya en la calidad de las respuestas en base a las preguntas
 
 
 ## Principio de Consentimiento para el Procesamiento de Huellas Digitales y Uso del Bot de Machine Learning
 
--Objetivo:
+- Objetivo:
 
-El presente documento tiene como objetivo informarte sobre el uso de huellas digitales de ejemplo (FCV2002) y el uso de un bot de machine learning en nuestro sistema, así como obtener tu consentimiento para dicho uso.
+_El presente documento tiene como objetivo informarte sobre el uso de huellas digitales de ejemplo (FCV2002) y el uso de un bot de machine learning en nuestro sistema, así como obtener tu consentimiento para dicho uso._
 
--Uso de Huellas Digitales de Ejemplo (FCV2002):
+- Uso de Huellas Digitales de Ejemplo (FCV2002):
 *(A pesar de que las huellas se encuentren disponibles para analizar decidimos realizar este disclaimer de ejemplo)*
 Las huellas digitales de ejemplo (FCV2002) son utilizadas únicamente con propósitos demostrativos y de prueba en nuestro sistema.
 Las huellas digitales de ejemplo (FCV2002) no se almacenan de forma permanente y son eliminadas después de su uso con fines demostrativos. 
 Nos comprometemos a no utilizar ni compartir las huellas digitales de ejemplo (FCV2002) con terceros para fines comerciales o de identificación
 Uso del Bot de Machine Learning:
 
--El bot de machine learning será utilizado para proporcionar asistencia y resolver consultas relacionadas con nuestros servicios.
+- El bot de machine learning será utilizado para proporcionar asistencia y resolver consultas relacionadas con nuestros servicios.
 La información proporcionada al bot será utilizada únicamente con fines demostrativos y de mejora del sistema.
 Nos comprometemos a proteger tu privacidad y no utilizar la información proporcionada al bot con fines comerciales o de identificación.
 

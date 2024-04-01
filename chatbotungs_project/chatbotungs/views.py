@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -13,8 +13,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem import WordNetLemmatizer
 from .models import BotResponseFeedback
+from .models import Usuario
 from chatbot import chatear  # Importa la función chatear desde script chatbot.py
-
+from .forms import RegistroUsuarioForm
 # Función para procesar las imágenes de huellas digitales
 from chatbot import process_fingerprint_images
 import tempfile
@@ -214,3 +215,41 @@ def chatbot_view(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return render(request, 'chatbot.html')
+
+
+def vista_registro(request):
+    mensaje_alerta = None  # Inicializa el mensaje de alerta como nulo
+    
+    if request.method == 'POST':
+        # Procesar el formulario si se ha enviado
+        form = RegistroUsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Obtener los datos del formulario validados
+            nombre = form.cleaned_data['nombre']
+            correo = form.cleaned_data['correo_electronico']
+            imagen = form.cleaned_data['imagen']
+            
+            # Guardar los datos en la base de datos
+            usuario = Usuario(nombre=nombre, correo_electronico=correo, imagen=imagen)
+            usuario.save()
+            
+            # Configurar el mensaje de alerta
+            mensaje_alerta = "Usuario registrado exitosamente"
+    else:
+        # Mostrar el formulario en caso de una solicitud GET
+        form = RegistroUsuarioForm()
+        
+    # Pasar el formulario y el mensaje de alerta al contexto de la plantilla
+    context = {'form': form, 'mensaje_alerta': mensaje_alerta}
+    return render(request, 'registro.html', context)
+
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pagina_inicio')  # Redirige a la página de inicio después de registrar al usuario
+    else:
+        form = RegistroUsuarioForm()
+    return render(request, 'registro_usuario.html', {'form': form})
