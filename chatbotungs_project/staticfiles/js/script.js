@@ -42,6 +42,36 @@ function handleKeyPress(event) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#registro-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        fetch('/ruta/de/tu/vista/vista_registro/', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const mensajeAlerta = document.querySelector('#mensaje-alerta');
+                mensajeAlerta.innerText = data.mensaje_alerta;
+                mensajeAlerta.classList.add('alert', 'alert-success');
+            } else {
+                // Mostrar errores en caso de que haya ocurrido algún problema en el formulario
+                const errores = data.errors;
+                // Aquí puedes mostrar los errores donde quieras en tu página
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
 
 function likeResponse(button) {
     // Obtener la respuesta del bot

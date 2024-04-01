@@ -216,40 +216,23 @@ def chatbot_view(request):
     else:
         return render(request, 'chatbot.html')
 
-
 def vista_registro(request):
-    mensaje_alerta = None  # Inicializa el mensaje de alerta como nulo
-    
     if request.method == 'POST':
-        # Procesar el formulario si se ha enviado
         form = RegistroUsuarioForm(request.POST, request.FILES)
         if form.is_valid():
-            # Obtener los datos del formulario validados
             nombre = form.cleaned_data['nombre']
             correo = form.cleaned_data['correo_electronico']
             imagen = form.cleaned_data['imagen']
             
-            # Guardar los datos en la base de datos
             usuario = Usuario(nombre=nombre, correo_electronico=correo, imagen=imagen)
             usuario.save()
             
-            # Configurar el mensaje de alerta
-            mensaje_alerta = "Usuario registrado exitosamente"
+            return JsonResponse({'success': True, 'mensaje_alerta': 'Usuario registrado exitosamente'})
+        else:
+            errors = dict(form.errors)
+            return JsonResponse({'success': False, 'errors': errors})
     else:
-        # Mostrar el formulario en caso de una solicitud GET
         form = RegistroUsuarioForm()
         
-    # Pasar el formulario y el mensaje de alerta al contexto de la plantilla
-    context = {'form': form, 'mensaje_alerta': mensaje_alerta}
+    context = {'form': form}
     return render(request, 'registro.html', context)
-
-
-def registrar_usuario(request):
-    if request.method == 'POST':
-        form = RegistroUsuarioForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('pagina_inicio')  # Redirige a la página de inicio después de registrar al usuario
-    else:
-        form = RegistroUsuarioForm()
-    return render(request, 'registro_usuario.html', {'form': form})

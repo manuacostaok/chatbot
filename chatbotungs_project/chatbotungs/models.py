@@ -1,6 +1,11 @@
 # models.py
 from django.db import models
 
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=100)
+    correo_electronico = models.EmailField()
+    imagen = models.ImageField(upload_to='./img/usuarios_registrados')
+
 class BotResponseFeedback(models.Model):
     user_question = models.TextField()
     bot_response = models.TextField()
@@ -8,9 +13,6 @@ class BotResponseFeedback(models.Model):
     liked = models.BooleanField(default=False)
 
 
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=100)
-    correo_electronico = models.EmailField(unique=True)
-    imagen = models.ImageField(upload_to='imagenes_usuarios')
+
 
     
