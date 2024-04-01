@@ -1,4 +1,6 @@
-<a href="#"><img width="100%" height="auto" src="https://i.imgur.com/iXuL1HG.png" height="175px"/></a>
+
+# Presentación del proyecto
+![](https://github.com/manuacostaok/chatbot/blob/main/TP%20Inicial.png)
 
 
 # Chatbot
