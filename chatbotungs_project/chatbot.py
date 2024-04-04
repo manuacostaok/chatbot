@@ -13,8 +13,8 @@ from sklearn.svm import SVC #machinelearn
 from sklearn.decomposition import PCA #machinelearn
 
 import nltk
-nltk.download('wordnet')
-nltk.download('punkt')
+nltk.download('wordnet') # util para lematización y búsqueda de sinónimos.
+nltk.download('punkt')  # útil para tareas de tokenización en procesamiento del lenguaje natural.
 
 
 # Definir el lematizador de NLTK
@@ -40,6 +40,7 @@ qa_pairs = {
     "mi servicio": "Para conocer el servicio que posee contacta con atención al cliente 0800-555-2323",
     "ampliar el servicio": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
     "mejorar plan": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
+    "atencion al cliente": "Para contactarse con atención al cliente marque 0800-555-2323",
     "pagar la factura":"Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",
     "disculpa": "Estoy aquí para ayudarte, no para perdonarte",
     "perdon": "Estoy aquí para ayudarte, no para perdonarte",
@@ -120,29 +121,34 @@ def process_fingerprint_images(image_path):
 
 def preprocess_text(sentence):
     # Tokenización y lematización
+    print('sentence')
+    print(sentence)    
     tokens = word_tokenize(sentence)
+    print('tokens')
+    print(tokens)
     lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens ]
+    print('lemmatized_tokens')
+    print(lemmatized_tokens)
     return " ".join(lemmatized_tokens)
 
 # Crear un vectorizador TF-IDF para clasificación de intenciones
-vectorizer = TfidfVectorizer(preprocessor=preprocess_text)
+vectorizer = TfidfVectorizer(preprocessor=preprocess_text) # Se indica que funcion preprocesador se va a utilizar
 preguntas = list(qa_pairs.keys())
-print("preguntas")
-print(preguntas)
 preguntas_vect = vectorizer.fit_transform(preguntas)
-print('preguntas_vect')
-print(preguntas_vect)
 
-# Etiquetas de las intenciones
-etiquetas = [idx for idx in range(len(qa_pairs))]
 
-# Entrenar un clasificador SVM para clasificar la intención del usuario
+# Las Etiquetas de las intenciones son esenciales para que el clasificador pueda aprender 
+# la relación entre las características de entrada (las preguntas del usuario) 
+# y las clases a las que pertenecen (las respuestas correspondientes).
+etiquetas = [idx for idx in range(len(qa_pairs))] 
+
+# Entrenar un clasificador SVM lineal
 clasificador = SVC(kernel='linear')
-clasificador.fit(preguntas_vect, etiquetas)
+clasificador.fit(preguntas_vect, etiquetas) # Se realiza la clasificacion con la relacion entre preguntas y etiquetas
 
 # Función para clasificar la intención del usuario
 def clasificar_intencion(respuesta_usuario):
-    respuesta_usuario = preprocess_text(respuesta_usuario)
+    respuesta_usuario = preprocess_text(respuesta_usuario)    
     respuesta_usuario_vect = vectorizer.transform([respuesta_usuario])
     return clasificador.predict(respuesta_usuario_vect)[0]
 
@@ -153,8 +159,8 @@ def generar_respuesta(intencion):
 # Función para chatear con el usuario
 def chatear(respuesta_usuario):     
     if respuesta_usuario.strip():  # Verificar si la entrada tiene sentido 
-        intencion = clasificar_intencion(respuesta_usuario)
-        respuesta_bot = generar_respuesta(intencion)
+        intencion = clasificar_intencion(respuesta_usuario) #devuelve la etiqueta con la intencion mas cercana
+        respuesta_bot = generar_respuesta(intencion) #devuelve la respuesta mas cercana que debe dar el 
     else: # Verificar si la entrada no está vacía
         respuesta_bot = "No dijiste nada, ¿podrías volver a intentarlo?"
 
