@@ -21,7 +21,7 @@ function sendMessage() {
                 chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
             } else if (data.response === 'exit') {
                 chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>";                        
-                close();
+                closeWindow();
             } else {
                 console.log(data.response);
                 chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + " <button class='like-button' onclick='likeResponse(this)'>Me gusta</button></p>";
@@ -32,7 +32,7 @@ function sendMessage() {
 }
 
 //cierra la ventana
-function close() {
+function closeWindow() {
     setTimeout(function () {
             window.close();                     
         },1800); // 1.8 segundos
