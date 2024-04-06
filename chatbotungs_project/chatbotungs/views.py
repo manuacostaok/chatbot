@@ -50,7 +50,7 @@ def get_response(request):
                 bot_response = chatear(user_message)  # Obtiene la respuesta del bot
                 return JsonResponse({'response': bot_response})  # Devuelve la respuesta como JSON
             else:
-                return JsonResponse({'error': 'El mensaje del usuario está vacío'})
+                return JsonResponse({'error': '"No dijiste nada, ¿podrías volver a intentarlo?"'})
         except Exception as e:
             return JsonResponse({'error': str(e)})
     else:

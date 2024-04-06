@@ -20,8 +20,8 @@ function sendMessage() {
                 console.log(data.error);
                 chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.error + "</p>";
             } else if (data.response === 'exit') {
-                chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>"                        
-                cerrar();
+                chatBox.innerHTML += "<p><strong>Bot:</strong> Hasta luego, espero haberte ayudado, saludos.</p>";                        
+                close();
             } else {
                 console.log(data.response);
                 chatBox.innerHTML += "<p><strong>Bot:</strong> " + data.response + " <button class='like-button' onclick='likeResponse(this)'>Me gusta</button></p>";
@@ -30,11 +30,14 @@ function sendMessage() {
 
     document.getElementById("user-input").value = "";
 }
-function cerrar() {
+
+//cierra la ventana
+function close() {
     setTimeout(function () {
             window.close();                     
-        },1800); // 3000 milisegundos = 1 segundo
-};     
+        },1800); // 1.8 segundos
+}
+
 // Función para manejar la pulsación de tecla en el campo de entrada de texto
 function handleKeyPress(event) {
     // Verificar si la tecla presionada es "Enter" (código 13)
