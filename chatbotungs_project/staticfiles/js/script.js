@@ -45,7 +45,7 @@ function handleKeyPress(event) {
         sendMessage();
     }
 }
-
+/*
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('#registro-form');
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
+*/
 function likeResponse(button) {
     // Obtener la respuesta del bot
     var botResponse = button.parentNode.innerText.replace('Me gusta', '').trim();
