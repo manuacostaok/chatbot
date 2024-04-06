@@ -24,10 +24,14 @@ lemmatizer = WordNetLemmatizer()
 # Diccionario de preguntas y respuestas
 qa_pairs = {
     "Como puedo proteger mi red Wi-Fi": "Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos.",
+    "cual es el horario de atencion": "el horario de atencion es de 9 a 18 hs en el local Juan María Gutiérrez 1150",
+    "quiero contratar un servicio proxy": "Ya registre su pedido, el personal de atencion al cliente se estará comunicando a la brevedad.",
+    "quiero contratar un servicio vpn": "Ya registre su pedido, el personal de atencion al cliente se estará comunicando a la brevedad.",
     "conectarse sin autorización": "Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos.",
     "Mi conexión wifi es más lenta en ciertas habitaciones de mi casa": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas.",
     "el wifi esta lenta": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas.Si luego no mejora el dispositivo puede tener la antena dañada",
     "mi wifi tiene poco potencia": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas. Si luego no mejora el dispositivo puede tener la antena dañada",
+    "tengo fallas tecnicas": "Voy a informar al servicio tecnico para que se esten comunicando para solucionarle el problema.",
     "¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
     "internet lento": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
     "la conexión es lenta": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
@@ -40,6 +44,7 @@ qa_pairs = {
     "mi servicio": "Para conocer el servicio que posee contacta con atención al cliente 0800-555-2323",
     "ampliar el servicio": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
     "mejorar plan": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
+    "soporte tecnico": "Para contactarse con soporte tecnico marque 0800-555-2020",
     "atencion al cliente": "Para contactarse con atención al cliente marque 0800-555-2323",
     "pagar la factura":"Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",
     "disculpa": "Estoy aquí para ayudarte, no para perdonarte",
@@ -51,11 +56,9 @@ qa_pairs = {
     "que quieres?": "Nada, estoy bien, solo quiero ayudarte, gracias",
     "como estas?": "Nada, estoy bien, solo quiero ayudarte, gracias",
     "nada": "No dijiste nada, ¿podrías volver a intentarlo?",
-    "cuando fuiste creado?": "Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",
-    "salir": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
-    "chau": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
+    "cuando fuiste creado?": "Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",    
     "adios": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
-    "exit": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'"
+    "59125712 ":"Gracias, aguarde unos minutos que corroboro la cobertura de su ubicacion.",    
 }
 
 def process_fingerprint_images(image_path):
@@ -121,15 +124,10 @@ def process_fingerprint_images(image_path):
 
 def preprocess_text(sentence):
     # Tokenización y lematización
-    print('sentence')
-    print(sentence)    
     tokens = word_tokenize(sentence)
-    print('tokens')
-    print(tokens)
     lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens ]
-    print('lemmatized_tokens')
-    print(lemmatized_tokens)
     return " ".join(lemmatized_tokens)
+
 
 # Crear un vectorizador TF-IDF para clasificación de intenciones
 vectorizer = TfidfVectorizer(preprocessor=preprocess_text) # Se indica que funcion preprocesador se va a utilizar
@@ -156,30 +154,17 @@ def clasificar_intencion(respuesta_usuario):
 def generar_respuesta(intencion):
     return list(qa_pairs.values())[intencion]
 
+arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit','disculpa','perdon',]
 # Función para chatear con el usuario
-def chatear(respuesta_usuario):     
-    if respuesta_usuario.strip():  # Verificar si la entrada tiene sentido 
+def chatear(respuesta_usuario):   
+    if respuesta_usuario.lower() == 'exit':
+        respuesta_bot = "exit"    
+    elif  len(respuesta_usuario.split()) > 1 or respuesta_usuario.lower()  in arrayOneWord:  # Verificar si la entrada tiene sentido         
         intencion = clasificar_intencion(respuesta_usuario) #devuelve la etiqueta con la intencion mas cercana
         respuesta_bot = generar_respuesta(intencion) #devuelve la respuesta mas cercana que debe dar el 
     else: # Verificar si la entrada no está vacía
-        respuesta_bot = "No dijiste nada, ¿podrías volver a intentarlo?"
-
+        respuesta_bot = "Lo siento, no logro comprender la pregunta. Por favor, intenta proporcionar más detalles."
     return respuesta_bot if respuesta_bot else "Lo siento, ha ocurrido un error inesperado."
 
-# Iniciar el chat
-if __name__ == "__main__":
-    while True:  # Bucle infinito para mantener la conversación
-        respuesta_usuario = input("Usuario: ")  # Obtener la respuesta del usuario
-        respuesta_bot = chatear(respuesta_usuario)  # Llamar a la función chatear con la respuesta del usuario como argumento
-        
-        if isinstance(respuesta_bot, dict):
-            # Si la respuesta es un diccionario, imprimir el mensaje de error
-            print(respuesta_bot.get('error', 'Error desconocido de la funcion main.'))
-        elif respuesta_usuario.lower() == "exit":
-            # Si la respuesta del bot es "exit", salir del bucle
-            print("¡Hasta luego!")
-            break
-        else:
-            # Imprimir la respuesta del bot
-            print("Bot:", respuesta_bot)
+
         

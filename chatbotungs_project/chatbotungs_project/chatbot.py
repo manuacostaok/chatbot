@@ -165,20 +165,3 @@ def chatear(respuesta_usuario):
 
     return respuesta_bot if respuesta_bot else "Lo siento, ha ocurrido un error inesperado."
 
-# Iniciar el chat
-if __name__ == "__main__":
-    while True:  # Bucle infinito para mantener la conversación
-        respuesta_usuario = input("Usuario: ")  # Obtener la respuesta del usuario
-        respuesta_bot = chatear(respuesta_usuario)  # Llamar a la función chatear con la respuesta del usuario como argumento
-        
-        if isinstance(respuesta_bot, dict):
-            # Si la respuesta es un diccionario, imprimir el mensaje de error
-            print(respuesta_bot.get('error', 'Error desconocido de la funcion main.'))
-        elif respuesta_bot.lower() == "exit":
-            # Si la respuesta del bot es "exit", salir del bucle
-            print("¡Hasta luego!")
-            break
-        else:
-            # Imprimir la respuesta del bot
-            print("Bot:", respuesta_bot)
-        
