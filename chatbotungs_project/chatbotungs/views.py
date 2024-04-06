@@ -9,13 +9,22 @@ import io
 import json
 from skimage import color, io as skio, img_as_ubyte
 from skimage.metrics import structural_similarity as ssim
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from nltk.stem import WordNetLemmatizer
 from .models import BotResponseFeedback
 from .models import Usuario
-from chatbot import chatear,clasificar_intencion  # Importa la función chatear desde script chatbot.py
+from chatbot import chatear,clasificar_intencion  # Importa las funciónes desde chatbot.py
+from chatbot import process_fingerprint_images
 from .forms import RegistroUsuarioForm
 # Función para procesar las imágenes de huellas digitales
-from chatbot import process_fingerprint_images
+
 import tempfile
+
+#import para la carga de img
+from PIL import Image
+from django.conf import settings
+
 
 
 @ensure_csrf_cookie
@@ -159,3 +168,33 @@ def vista_registro(request):
         
     context = {'form': form}
     return render(request, 'registro.html', context)
+
+
+#funcion para la carga de imagenes que convierte a tif y lo guarda en nuestro proyecto
+def upload_image(request):
+    if request.method == 'POST' and request.FILES['image']:
+        uploaded_image = request.FILES['image']
+        image_name = uploaded_image.name
+        image_format = os.path.splitext(image_name)[1].lower()
+        
+        # Verifica si la extensión del archivo es válida
+        if image_format not in ['.jpg', '.jpeg', '.png', '.tif', '.tiff']:
+            return JsonResponse({'error': 'El formato de la imagen no es compatible'})
+        
+        # Guarda la imagen en el sistema de archivos en el directorio staticfiles/img/
+        image_path = os.path.join(settings.BASE_DIR, 'staticfiles', 'img','huella_registrada', image_name)
+        with open(image_path, 'wb+') as destination:
+            for chunk in uploaded_image.chunks():
+                destination.write(chunk)
+        
+        # Convierte la imagen al formato deseado si es necesario
+        if image_format not in ['.tif', '.tiff']:
+            image = Image.open(image_path)
+            tif_image_path = os.path.splitext(image_path)[0] + '.tif'
+            image.save(tif_image_path)
+        
+        # Si necesitas almacenar la ubicación de la imagen en tu base de datos, hazlo aquí
+        
+        return JsonResponse({'message': 'Imagen subida exitosamente'})
+    else:
+        return JsonResponse({'error': 'Método no permitido'})

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,18 @@
             <button id="send-button" onclick="sendMessage()">Enviar</button>
         </div>
     </div>
+    
     <!-- Formulario para cargar imágenes de huellas digitales -->
+    <div id="chat-container">
+        <h2>Ingrese imagen de huella dactilar para guardar en el registro</h2>
+        <form id="image-upload-form" enctype="multipart/form-data" action="{% url 'upload_image' %}" method="post">
+            {% csrf_token %}
+            <p>Seleccione la imagen de la huella dactilar:</p>
+            <input type="file" id="image-input" name="image" accept=".tif, .tiff">
+            <button type="submit">Subir Imagen</button>
+        </form>
+    </div>
+
     <div id="chat-container">
         <h2>Login de huella digital</h2>
         <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
@@ -36,6 +47,7 @@
             <button type="submit">Login</button>
         </form>
     </div>
+
     <div id="registro">
         <h1>Registro de Usuario</h1>
         {% if mensaje_alerta %}
@@ -55,7 +67,7 @@
             <button type="submit">Registrarse</button>
         </form>
     </div>
-    <script src="{% static 'js/script.js' %}"></script>    
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>

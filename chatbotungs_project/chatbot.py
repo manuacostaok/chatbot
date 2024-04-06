@@ -24,14 +24,10 @@ lemmatizer = WordNetLemmatizer()
 # Diccionario de preguntas y respuestas
 qa_pairs = {
     "Como puedo proteger mi red Wi-Fi": "Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos.",
-    "cual es el horario de atencion": "el horario de atencion es de 9 a 18 hs en el local Juan María Gutiérrez 1150",
-    "quiero contratar un servicio proxy": "Ya registre su pedido, el personal de atencion al cliente se estará comunicando a la brevedad.",
-    "quiero contratar un servicio vpn": "Ya registre su pedido, el personal de atencion al cliente se estará comunicando a la brevedad.",
     "conectarse sin autorización": "Puedes proteger tu red Wi-Fi utilizando una contraseña segura y habilitando la encriptación WPA2 o WPA3. También puedes desactivar la difusión del nombre de tu red (SSID) para que no sea visible para otros dispositivos cercanos.",
     "Mi conexión wifi es más lenta en ciertas habitaciones de mi casa": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas.",
     "el wifi esta lenta": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas.Si luego no mejora el dispositivo puede tener la antena dañada",
     "mi wifi tiene poco potencia": "Esto podría deberse a una señal Wi-Fi débil en esas áreas. Intenta mover el enrutador a un lugar más central en tu casa o utiliza un extensor de alcance Wi-Fi para mejorar la cobertura en esas áreas. Si luego no mejora el dispositivo puede tener la antena dañada",
-    "tengo fallas tecnicas": "Voy a informar al servicio tecnico para que se esten comunicando para solucionarle el problema.",
     "¿Por qué mi velocidad de internet es más lenta de lo que debería ser según mi plan?": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
     "internet lento": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
     "la conexión es lenta": "La velocidad de internet puede verse afectada por varios factores, como la congestión de la red, problemas con el enrutador o cables dañados. Te recomendaría realizar una prueba de velocidad en diferentes momentos del día y, si la velocidad es consistentemente baja, contactar a nuestro servicio de atención al cliente para que podamos investigar más a fondo.",
@@ -44,7 +40,6 @@ qa_pairs = {
     "mi servicio": "Para conocer el servicio que posee contacta con atención al cliente 0800-555-2323",
     "ampliar el servicio": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
     "mejorar plan": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
-    "soporte tecnico": "Para contactarse con soporte tecnico marque 0800-555-2020",
     "atencion al cliente": "Para contactarse con atención al cliente marque 0800-555-2323",
     "pagar la factura":"Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",
     "disculpa": "Estoy aquí para ayudarte, no para perdonarte",
@@ -56,67 +51,74 @@ qa_pairs = {
     "que quieres?": "Nada, estoy bien, solo quiero ayudarte, gracias",
     "como estas?": "Nada, estoy bien, solo quiero ayudarte, gracias",
     "nada": "No dijiste nada, ¿podrías volver a intentarlo?",
-    "cuando fuiste creado?": "Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",    
+    "cuando fuiste creado?": "Fui creado luego del Big Bang pero mi código fuente fue descubierto en 2024",
+    "salir": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
+    "chau": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
     "adios": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'",
-    "59125712 ":"Gracias, aguarde unos minutos que corroboro la cobertura de su ubicacion.",    
+    "exit": "Chau, espero haberte ayudado, recuerda que para salir del chat debes escribir 'EXIT'"
 }
 
 def process_fingerprint_images(image_path):
-    # Ruta de la imagen local
-    local_image_path = os.path.join('staticfiles', 'img', 'huella_registrada', 'imagen_local.tif')
+    # Ruta del directorio de huellas registradas
+    registered_images_directory = os.path.join('staticfiles', 'img', 'huella_registrada')
     
-    print("Cargando la imagen local...")
-    try:
-        # Cargar la imagen local para comparar
-        local_image = skio.imread(local_image_path)
-        # Convertir a RGB si es necesario
-        if local_image.ndim != 3 or local_image.shape[2] != 3:
-            local_image = color.gray2rgb(local_image)
-        print("Imagen local cargada correctamente.")
-    except Exception as e:
-        # Si ocurre algún error al cargar la imagen local
-        print("Error al cargar la imagen local:", e)
-        return {'error': 'Error al cargar la imagen local.'}
-    
+    # Cargar la imagen de huella digital para comparar
     print("Cargando la imagen de huella digital...")
     try:
-        # Cargar la imagen de huella digital para comparar
         fingerprint_image = skio.imread(image_path)
-        # Convertir a RGB si es necesario
         if fingerprint_image.ndim != 3 or fingerprint_image.shape[2] != 3:
             fingerprint_image = color.gray2rgb(fingerprint_image)
         print("Imagen de huella digital cargada correctamente.")
     except Exception as e:
-        # Si ocurre algún error al cargar la imagen de huella digital
         print("Error al cargar la imagen de huella digital:", e)
         return {'error': 'Error al cargar la imagen de huella digital.'}
     
-    # Convertir ambas imágenes a escala de grises
-    local_image_gray = color.rgb2gray(local_image)
-    print("Forma de local_image_gray:", local_image_gray.shape)  # Agregar este print para verificar la forma
+    # Convertir la imagen de huella digital a escala de grises
     fingerprint_image_gray = color.rgb2gray(fingerprint_image)
-    print("Imágenes convertidas a escala de grises.")
-    
-    # Calcular el índice de similitud estructural (SSIM) entre las imágenes
-    try:
-        similarity_index = ssim(local_image_gray, fingerprint_image_gray, data_range=1.0)
-        print("Índice de similitud estructural calculado:", similarity_index)
-    except Exception as e:
-        print("Error al calcular el índice de similitud estructural:", e)
-        return {'error': 'Error al calcular el índice de similitud estructural.'}
     
     # Definir un umbral de similitud
     threshold = 0.95  # Umbral de similitud del 95%
     
-    # Comparar el índice de similitud con el umbral
-    if similarity_index >= threshold:
-        # Si la similitud es alta, las imágenes son consideradas iguales
-        print("La huella digital es similar a la imagen local.")
-        return {'message': 'La huella digital es similar a la imagen local.'}
-    else:
-        # Si la similitud es baja, las imágenes son diferentes
-        print("La huella digital es diferente a la imagen local.")
-        return {'message': 'La huella digital es diferente a la imagen local.'}
+    # Iterar sobre los archivos en el directorio de huellas registradas
+    for filename in os.listdir(registered_images_directory):
+        # Ignorar archivos que no son imágenes
+        if not filename.endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff')):
+            continue
+        
+        # Construir la ruta completa del archivo de huella registrada
+        registered_image_path = os.path.join(registered_images_directory, filename)
+        
+        # Cargar la imagen de huella registrada
+        print(f"Cargando la imagen de huella registrada: {filename}...")
+        try:
+            registered_image = skio.imread(registered_image_path)
+            if registered_image.ndim != 3 or registered_image.shape[2] != 3:
+                registered_image = color.gray2rgb(registered_image)
+            print(f"Imagen de huella registrada '{filename}' cargada correctamente.")
+        except Exception as e:
+            print(f"Error al cargar la imagen de huella registrada '{filename}':", e)
+            continue
+        
+        # Convertir la imagen de huella registrada a escala de grises
+        registered_image_gray = color.rgb2gray(registered_image)
+        
+        # Calcular el índice de similitud estructural (SSIM) entre las imágenes
+        try:
+            similarity_index = ssim(registered_image_gray, fingerprint_image_gray, data_range=1.0)
+            print(f"Índice de similitud estructural entre '{filename}' y la imagen de huella digital:", similarity_index)
+        except Exception as e:
+            print(f"Error al calcular el índice de similitud estructural entre '{filename}' y la imagen de huella digital:", e)
+            continue
+        
+        # Comparar el índice de similitud con el umbral
+        if similarity_index >= threshold:
+            # Si la similitud es alta, las imágenes son consideradas iguales
+            print(f"La huella digital es similar a la imagen registrada: {filename}")
+            return {'message': f"La huella digital es similar a la imagen registrada: {filename}"}
+    
+    # Si ninguna imagen registrada coincide con la huella digital
+    print("La huella digital no coincide con ninguna imagen registrada.")
+    return {'message': 'La huella digital no coincide con ninguna imagen registrada.'}
     
 #En este ejemplo, primero usamos PCA para reducir la dimensionalidad de las imágenes de huellas digitales y la imagen local. 
 #    Luego, entrenamos un clasificador SVM con las características extraídas de la imagen local.
@@ -124,10 +126,15 @@ def process_fingerprint_images(image_path):
 
 def preprocess_text(sentence):
     # Tokenización y lematización
+    print('sentence')
+    print(sentence)    
     tokens = word_tokenize(sentence)
+    print('tokens')
+    print(tokens)
     lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens ]
+    print('lemmatized_tokens')
+    print(lemmatized_tokens)
     return " ".join(lemmatized_tokens)
-
 
 # Crear un vectorizador TF-IDF para clasificación de intenciones
 vectorizer = TfidfVectorizer(preprocessor=preprocess_text) # Se indica que funcion preprocesador se va a utilizar
@@ -154,17 +161,30 @@ def clasificar_intencion(respuesta_usuario):
 def generar_respuesta(intencion):
     return list(qa_pairs.values())[intencion]
 
-arrayOneWord = ['hola','hey','buenas','nada','salir','chau','adios','exit','disculpa','perdon',]
 # Función para chatear con el usuario
-def chatear(respuesta_usuario):   
-    if respuesta_usuario.lower() == 'exit':
-        respuesta_bot = "exit"    
-    elif  len(respuesta_usuario.split()) > 1 or respuesta_usuario.lower()  in arrayOneWord:  # Verificar si la entrada tiene sentido         
+def chatear(respuesta_usuario):     
+    if respuesta_usuario.strip():  # Verificar si la entrada tiene sentido 
         intencion = clasificar_intencion(respuesta_usuario) #devuelve la etiqueta con la intencion mas cercana
         respuesta_bot = generar_respuesta(intencion) #devuelve la respuesta mas cercana que debe dar el 
     else: # Verificar si la entrada no está vacía
-        respuesta_bot = "Lo siento, no logro comprender la pregunta. Por favor, intenta proporcionar más detalles."
+        respuesta_bot = "No dijiste nada, ¿podrías volver a intentarlo?"
+
     return respuesta_bot if respuesta_bot else "Lo siento, ha ocurrido un error inesperado."
 
-
+# Iniciar el chat
+if __name__ == "__main__":
+    while True:  # Bucle infinito para mantener la conversación
+        respuesta_usuario = input("Usuario: ")  # Obtener la respuesta del usuario
+        respuesta_bot = chatear(respuesta_usuario)  # Llamar a la función chatear con la respuesta del usuario como argumento
+        
+        if isinstance(respuesta_bot, dict):
+            # Si la respuesta es un diccionario, imprimir el mensaje de error
+            print(respuesta_bot.get('error', 'Error desconocido de la funcion main.'))
+        elif respuesta_usuario.lower() == "exit":
+            # Si la respuesta del bot es "exit", salir del bucle
+            print("¡Hasta luego!")
+            break
+        else:
+            # Imprimir la respuesta del bot
+            print("Bot:", respuesta_bot)
         
