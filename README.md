@@ -106,17 +106,6 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 
 - Uso de IAs tales como Chat GPT, Gemini, etc.
 
-## Pasos para probar el Chatbot
-
-- instalar python : https://www.python.org/downloads/
-
-- instalar bibliotecas : *pip install nltk, skimage, django y sklearn*
-
-- Para ejecutar de manera local muevase al directorio y ejecute en consola: *python chatbot.py*
-(desde esta prueba se le pasa un directorio para cargar ambas imagenes y comparar)
-- Para ejecutar la prueba del chat en el servidor django ejecutar dentro de la carpeta del proyecto: *python manage.py runserver*
-(desde esta prueba se puede cargar una imagen a comparar)
-
 ## Avances
 
 - Como avances en el chatbot tenemos la implementacion de Django como framework para poder hostear la app y probarla con una interface gráfica
@@ -174,3 +163,10 @@ Nos comprometemos a proteger tu privacidad y no utilizar la información proporc
 - Permisos de Archivo: Asegúrate de tener los permisos necesarios para leer y escribir archivos en el sistema de archivos donde se ejecutará la aplicación.
 
 - Entorno Virtual (Opcional): Se recomienda utilizar un entorno virtual para aislar las dependencias de la aplicación y evitar conflictos con otras bibliotecas o versiones de Python instaladas en el sistema
+
+## Pasos para probar el Chatbot
+
+- Una vez instalados todos los requisitos: 
+
+- Para ejecutar la prueba del chat en el servidor django ejecutar dentro de la carpeta del proyecto: *python manage.py runserver*
+*(debe estar ubicado en el directorio donde se encuentre "manage.py")*

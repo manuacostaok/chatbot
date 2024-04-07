@@ -2,8 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: linear-gradient(to bottom right, #f0f0f0, #d8d8d8);
 }
-
 #chat-container {
     max-width: 400px;
     margin: 50px auto;
@@ -19,11 +19,11 @@ body {
     background-color: rgb(241, 221, 221); /* Se agrega un color de fondo opcional */
     display: flex;
     justify-content: center;
-    align-items:last baseline;
+    align-items: baseline;
 }
 
-#image-upload-container {
-    height: 300px;
+#image-upload-container, #login-container {
+    height: 280px;
     overflow-y: scroll;
     padding: 10px;
     background-color: #f2f2f2;
@@ -49,15 +49,15 @@ body {
     border-radius: 5px;
 }
 
-#like-button{
+#like-button {
     width: 1cm;
-    color: red;
+    color: rgb(43, 111, 247);
 }
 
-button{
+button {
     width: 75px;
-    background-color: #73dd73;
-    color: rgb(0, 0, 0);
+    background-color: rgb(43, 111, 247);
+    color: rgb(255, 255, 255);
     border: black;
     cursor: pointer;
     border-radius: 6px;
@@ -65,7 +65,7 @@ button{
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #3b57c7;
 }
 
 p {
@@ -73,5 +73,31 @@ p {
 }
 
 p strong {
-    color: #4CAF50;
+    color: #857ae7;
+}
+
+/* Estilos para el título y botón de GitHub */
+#title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#title-container h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.github-button {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.github-button i {
+    margin-right: 10px;
 }

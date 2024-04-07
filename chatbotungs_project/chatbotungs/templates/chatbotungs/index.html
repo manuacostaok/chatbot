@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
     {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-
 <body>
-    
-    <div id="chat-container">
-        <div id="chat-box">
-            <!-- Mensaje de bienvenida del bot con token CSRF -->
-            {% csrf_token %}
-            <p><strong>Bot:</strong> Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte?</p>
-            {% for bot_response in bot_responses %}
-                <p><strong>Respuesta del bot:</strong> {{ bot_response.bot_response }}</p>
-                <p><strong>Likes:</strong> {{ bot_response.likes }}</p>
-                <button class="like-button" onclick="likeResponse('{{ bot_response.id }}')">Me gusta</button>
-            {% endfor %}
-        </div>
-        <div id="user-input-container"> <!-- Contenedor para el campo de entrada y el botón -->
-            <input type="text" id="user-input" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
-            <button id="send-button" onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
-    
-    <!-- Formulario para cargar imágenes de huellas digitales -->
-    <div id="chat-container">
-        <h2>Ingrese imagen de huella dactilar para guardar en el registro</h2>
-        <form id="image-upload-form" enctype="multipart/form-data" action="{% url 'upload_image' %}" method="post">
-            {% csrf_token %}
-            <p>Seleccione la imagen de la huella dactilar:</p>
-            <input type="file" id="image-input" name="image" accept=".tif, .tiff">
-            <button type="submit">Subir Imagen</button>
-        </form>
+    <!-- Banner -->
+    <div class="jumbotron text-center mb-0">
+        <h1 class="display-4">Trabajo Práctico - Chatbot -</h1>
+        <p class="lead">Laboratorio de Construcción de Software</p>
+        <a href="https://github.com/manuacostaok/chatbot" class="github-button btn btn-dark" target="_blank">
+            <i class="fab fa-github"></i> Ver en GitHub
+        </a>
     </div>
 
-    <div id="chat-container">
-        <h2>Login de huella digital</h2>
-        <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
-            <p> Seleccione la imagen de su huella digital registrada</p>
-            <input type="file" id="image-input" name="image" accept=".tif, .tiff">
-            <button type="submit">Login</button>
-        </form>
+    <div class="container">
+        <div class="row">
+            <!-- Sección del chat -->
+            <div class="col-md-8 mt-3">
+                <div id="chat-container">
+                    <div id="chat-box">
+                        <!-- Mensaje de bienvenida del bot con token CSRF -->
+                        {% csrf_token %}
+                        <p><strong>Bot:</strong> Hola, soy Cosme Fulanito, el bot de servicio de ayuda. ¿En qué puedo ayudarte?</p>
+                        {% for bot_response in bot_responses %}
+                            <p><strong>Respuesta del bot:</strong> {{ bot_response.bot_response }}</p>
+                            <p><strong>Likes:</strong> {{ bot_response.likes }}</p>
+                            <button class="like-button btn btn-primary float-right" onclick="likeResponse('{{ bot_response.id }}')"><i class="fas fa-thumbs-up"></i> Me gusta</button>
+                        {% endfor %}
+                    </div>
+                    <div id="user-input-container" class="mt-3">
+                        <div class="input-group">
+                            <input type="text" id="user-input" class="form-control" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
+                            <div class="input-group-append">
+                                <button id="send-button" class="btn btn-primary" onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sección de la imagen de huella dactilar -->
+            <div class="col-md-4 mt-3">
+                <div id="image-upload-container">
+                    <h2 class="text-center">Ingrese imagen de huella dactilar para guardar en el registro</h2>
+                    <form id="image-upload-form" enctype="multipart/form-data" action="{% url 'upload_image' %}" method="post">
+                        {% csrf_token %}
+                        <p>Seleccione la imagen de la huella dactilar:</p>
+                        <input type="file" id="image-input" name="image" class="form-control-file" accept=".tif, .tiff">
+                        <button type="submit" class="btn btn-primary float-right">Subir Imagen</button>
+                    </form>
+                </div>
+                <!-- Sección del login de huella dactilar -->
+                <div id="login-container" class="mt-3">
+                    <h2 class="text-center">Login de huella digital</h2>
+                    <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
+                        <p> Seleccione la imagen de su huella digital registrada</p>
+                        <input type="file" id="image-input" name="image" class="form-control-file" accept=".tif, .tiff">
+                        <button type="submit" class="btn btn-primary float-right">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
- <!-- 
-    <div id="registro">
-        <h1>Registro de Usuario</h1>
-        {% if mensaje_alerta %}
-        <div class="alert alert-success">{{ mensaje_alerta }}</div>
-        {% endif %}
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="id_nombre">Nombre:</label>
-            <input type="text" id="id_nombre" name="nombre">
-            <br>
-            <label for="id_correo_electronico">Correo Electrónico:</label>
-            <input type="email" id="id_correo_electronico" name="correo_electronico">
-            <br>
-            <label for="id_imagen">Imagen:</label>
-            <input type="file" id="id_imagen" name="imagen">
-            <br>
-            <button type="submit">Registrarse</button>
-        </form>
-    </div> -->
+    
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <span class="text-muted">- Acosta - Lombardi - Arditti -</span>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
-
 </html>
