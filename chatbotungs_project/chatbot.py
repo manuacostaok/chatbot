@@ -46,6 +46,12 @@ qa_pairs = {
     "mejorar plan": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
     "soporte tecnico": "Para contactarse con soporte tecnico marque 0800-555-2020",
     "atencion al cliente": "Para contactarse con atención al cliente marque 0800-555-2323",
+    "mejorar/actualizar plan": "Para ampliar el servicio contacta con atención al cliente 0800-555-2323",
+    "Necesito comunicarme con el area de soporte/servicio/atencion al cliente": "Para contactarse con soporte tecnico marque 0800-555-2020",
+    "Dar de baja el servicio": "Lamentamos oir eso :(. A la brevedad un representante se estara comunicando para proceder con la operación. Muchas gracias.",
+    "Ampliar cobertura de la red wifi": "Si desea ampliar la cobertura de su red, debido a que la conexion es débil o inestable en lugares alejados del router, sugerimos instalar un repetidor adicional. Puede contratarlo llamando a atencion al cliente 0800-555-2323",
+    "Mejorar la velocidad de internet": "Puede mejorar su velocidad de internet eligiendo el paquete de MB/s que mas le parezca conveniente. Para ello, contactese con atencion al cliente 0800-555-2020 y se iniciara la gestión correspondiente.",
+    "Cambiar contraseña Wifi": "Para cambiar la contraseña de su red Wi-Fi, debe acceder a su navegador web y allí:\n 1-Ingresar en la barra de tareas la dirección 192.168.1.1 \n 2-Ingresar los datos de usuario y contraseña \n 3-Entrar en los ajustes de red Wi-Fi \n 4-Seleccionar la opción de cambio de contraseña.",
     "pagar la factura":"Hay que pagarla el día 15 de cada mes por cualquier método de pago, o una vez por año si elegiste el servicio anual, también puede adherirla al débito automático",
     "disculpa": "Estoy aquí para ayudarte, no para perdonarte",
     "perdon": "Estoy aquí para ayudarte, no para perdonarte",
@@ -131,15 +137,9 @@ def process_fingerprint_images(image_path):
 #     Finalmente, utilizamos el clasificador para predecir si la huella digital es similar o diferente a la imagen local.
 
 def preprocess_text(sentence):
-    # Tokenización y lematización
-    print('sentence')
-    print(sentence)    
+    # Tokenización y lematización  
     tokens = word_tokenize(sentence)
-    print('tokens')
-    print(tokens)
     lemmatized_tokens = [lemmatizer.lemmatize(token.lower()) for token in tokens ]
-    print('lemmatized_tokens')
-    print(lemmatized_tokens)
     return " ".join(lemmatized_tokens)
 
 # Crear un vectorizador TF-IDF para clasificación de intenciones
