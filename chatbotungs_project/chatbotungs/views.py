@@ -175,6 +175,7 @@ def upload_image(request):
     if request.method == 'POST' and request.FILES['image']:
         uploaded_image = request.FILES['image']
         image_name = uploaded_image.name
+        print(image_name)
         image_format = os.path.splitext(image_name)[1].lower()
         
         # Verifica si la extensión del archivo es válida

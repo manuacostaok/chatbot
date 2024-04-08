@@ -52,7 +52,7 @@
                         {% csrf_token %}
                         <p>Seleccione la imagen de la huella dactilar:</p>
                         <input type="file" id="image-input" name="image" class="form-control-file" accept=".tif, .tiff">
-                        <button type="submit" class="btn btn-primary float-right">Subir Imagen</button>
+                        <button type="submit" id="upload-button" class="btn btn-primary float-right">Subir Imagen</button>
                     </form>
                 </div>
                 <!-- Sección del login de huella dactilar -->
@@ -61,7 +61,7 @@
                     <form id="image-upload-form" enctype="multipart/form-data" action="/process_fingerprint_images_web/" method="post">
                         <p> Seleccione la imagen de su huella digital registrada</p>
                         <input type="file" id="image-input" name="image" class="form-control-file" accept=".tif, .tiff">
-                        <button type="submit" class="btn btn-primary float-right">Login</button>
+                        <button type="submit" id="login-button"  class="btn btn-primary float-right">Login</button>
                     </form>
                 </div>
             </div>

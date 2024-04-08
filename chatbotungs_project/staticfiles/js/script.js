@@ -1,6 +1,29 @@
 // Obtener referencia al contenedor del chat y al cuadro de mensajes
 var chatBox = document.getElementById("chat-box");
 
+// Funcion para parar boton si no hay imagen 
+document.getElementById("upload-button").addEventListener("click", function(event) {
+    // Verifica si se ha seleccionado una imagen
+    var imageInput = document.getElementById("image-input");
+    if (imageInput.files.length === 0) {
+        // Si no se ha seleccionado ninguna imagen, evita el envío del formulario
+        event.preventDefault();
+        alert("Por favor, seleccione una imagen antes de continuar.");
+    }
+    
+});
+
+document.getElementById("login-button").addEventListener("click", function(event) {
+    // Verifica si se ha seleccionado una imagen
+    var imageInput = document.getElementById("image-input");
+    if (imageInput.files.length === 0) {
+        // Si no se ha seleccionado ninguna imagen, evita el envío del formulario
+        event.preventDefault();
+        alert("Por favor, seleccione una imagen antes de continuar.");
+    }
+    
+});
+
 // Función para enviar un mensaje y recibir una respuesta del servidor
 function sendMessage() {
     var userInput = document.getElementById("user-input").value;
