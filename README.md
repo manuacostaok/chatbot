@@ -102,6 +102,8 @@ El kit de herramientas de lenguaje natural, o más comúnmente NLTK, es un conju
 
 - Django como framework 
 
+- Bootstrap 4 , html , js 
+
 - Github
 
 - Uso de IAs tales como Chat GPT, Gemini, etc.
